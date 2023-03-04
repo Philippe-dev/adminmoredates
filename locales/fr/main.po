@@ -1,0 +1,6 @@
+
+msgid "Updated"
+msgstr "Mise à jour"
+
+msgid "Created"
+msgstr "Création"
