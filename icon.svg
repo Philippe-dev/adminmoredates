@@ -1,1 +1,10 @@
-<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#405fa6" d="m2.875 6c-1.554687 0-2.875 1.253906-2.875 2.8125v14.375c0 1.558594 1.320313 2.8125 2.875 2.8125h26.25c1.554688 0 2.875-1.253906 2.875-2.8125v-14.375c0-1.558594-1.320312-2.8125-2.875-2.8125zm0 2h26.25c.515625 0 .875.382813.875.8125v14.375c0 .429688-.359375.8125-.875.8125h-26.25c-.515625 0-.875-.382812-.875-.8125v-14.375c0-.429687.359375-.8125.875-.8125zm2.125 3v10h3v-6.65625l3 3.96875 3-3.96875v6.65625h3v-10h-3l-3 4-3-4zm17 0v5h-3l4.5 5 4.5-5h-3v-5z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 48 48" version="1" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 48 48">
+    <path fill="#90CAF9" d="M30,5H18c-2.2,0-4,1.8-4,4v30c0,2.2,1.8,4,4,4h12c2.2,0,4-1.8,4-4V9C34,6.8,32.2,5,30,5z M18,39V9h12l0,30 H18z"/>
+    <circle fill="#43A047" cx="38" cy="38" r="10"/>
+    <g fill="#ffffff">
+        <rect x="36" y="32" width="4" height="12"/>
+        <rect x="32" y="36" width="12" height="4"/>
+    </g>
+</svg>
