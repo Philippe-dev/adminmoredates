@@ -20,3 +20,4 @@ dcCore::app()->addBehavior('adminPostListHeaderV2', [adminmoredates::class, 'adm
 dcCore::app()->addBehavior('adminPostListValueV2', [adminmoredates::class, 'adminPostListValue']);
 dcCore::app()->addBehavior('adminPagesListHeaderV2', [adminmoredates::class, 'adminPagesListHeader']);
 dcCore::app()->addBehavior('adminPagesListValueV2', [adminmoredates::class, 'adminPagesListValue']);
+dcCore::app()->addBehavior('adminPostsSortbyCombo', [adminmoredates::class, 'adminPostsSortbyCombo']);
