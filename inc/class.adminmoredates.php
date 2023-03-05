@@ -14,15 +14,15 @@ class adminmoredates
 {
     public static function adminColumnsLists($cols)
     {
-        $cols['posts'][1]['upddt'] = [true, __('Updated')];
+        $cols['posts'][1]['upddt']  = [true, __('Updated')];
         $cols['posts'][2]['creadt'] = [true, __('Created')];
-        $cols['pages'][1]['upddt'] = [true, __('Updated')];
+        $cols['pages'][1]['upddt']  = [true, __('Updated')];
         $cols['pages'][2]['creadt'] = [true, __('Created')];
     }
 
     private static function adminEntryListHeader($core, $rs, $cols)
     {
-        $cols['upddt'] = '<th scope="col">' . __('Updated') . '</th>';
+        $cols['upddt']  = '<th scope="col">' . __('Updated') . '</th>';
         $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
     }
 
@@ -38,7 +38,7 @@ class adminmoredates
 
     public static function adminEntryListValue($core, $rs, $cols)
     {
-        $cols['upddt'] = '<td class="nowrap">' . dt::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
+        $cols['upddt']  = '<td class="nowrap">' . dt::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
         $cols['creadt'] = '<td class="nowrap">' . dt::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
     }
 
@@ -55,6 +55,6 @@ class adminmoredates
     public static function adminPostsSortbyCombo($container)
     {
         $container[0][__('Creation date')] = 'post_creadt';
-        $container[0][__('Update date')] = 'post_upddt';
+        $container[0][__('Update date')]   = 'post_upddt';
     }
 }
