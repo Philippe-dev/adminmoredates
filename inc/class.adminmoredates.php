@@ -54,7 +54,7 @@ class adminmoredates
 
     public static function adminPostsSortbyCombo($container)
     {
-        $container[0][__('Create date')] = 'post_creadt';
+        $container[0][__('Creation date')] = 'post_creadt';
         $container[0][__('Update date')] = 'post_upddt';
     }
 }

@@ -4,3 +4,9 @@ msgstr "Mise à jour"
 
 msgid "Created"
 msgstr "Création"
+
+msgid "Creation date"
+msgstr "Date de création"
+
+msgid "Update date"
+msgstr "Date de mise à jour"
