@@ -16,7 +16,7 @@ if (!defined('DC_RC_PATH')) {
 
 $this->registerModule(
     'Admin More Dates',
-    'Display all dates in admin lists',
+    'Display all posts dates in admin lists',
     'Philippe aka amalgame and contributors',
     '0.2',
     [
