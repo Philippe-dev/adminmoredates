@@ -51,4 +51,10 @@ class adminmoredates
     {
         self::adminEntryListValue(dcCore::app(), $rs, $cols);
     }
+
+    public static function adminPostsSortbyCombo($container)
+    {
+        $container[0][__('Create date')] = 'post_creadt';
+        $container[0][__('Update date')] = 'post_upddt';
+    }
 }
