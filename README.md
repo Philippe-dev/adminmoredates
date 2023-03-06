@@ -1,7 +1,7 @@
 Dotclear 2 plugin
 =================
 
-This simple plugin allows the display of posts creation and last update dates in admin posts lists
+This simple plugin allows the display of all posts dates (publication, creation and last update) in admin posts lists
 
 For public pages, use in templates:
   <span class="post-date">Date: {{tpl:EntryDate}}.</span>
