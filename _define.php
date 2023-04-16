@@ -16,11 +16,11 @@ if (!defined('DC_RC_PATH')) {
 
 $this->registerModule(
     'Admin More Dates',
-    'Display more dates in posts lists',
+    'Display creation and update dates in posts and pages lists',
     'Philippe aka amalgame and contributors',
     '1.0',
     [
-        'requires'    => [['core', '2.26']],
+        'requires'    => [['core', '2.25']],
         'permissions' => dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_USAGE,
             dcAuth::PERMISSION_CONTENT_ADMIN,
