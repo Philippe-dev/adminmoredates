@@ -26,5 +26,6 @@ $this->registerModule(
             dcAuth::PERMISSION_CONTENT_ADMIN,
         ]),
         'type'     => 'plugin',
+        'support'    => 'https://github.com/Philippe-dev/adminmoredates',
     ]
 );
