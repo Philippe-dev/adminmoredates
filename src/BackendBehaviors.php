@@ -10,14 +10,22 @@
  * @copyright philippe@dissitou.org
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-class adminmoredates
+
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\adminmoredates;
+
+use dcCore;
+use dt;
+
+class BackendBehaviors
 {
     public static function adminColumnsLists($cols)
     {
-        $cols['posts'][1]['upddt']  = [true, __('Updated')];
-        $cols['posts'][2]['creadt'] = [true, __('Created')];
-        $cols['pages'][1]['upddt']  = [true, __('Updated')];
-        $cols['pages'][2]['creadt'] = [true, __('Created')];
+        $cols['posts'][1]['upddt']  = [true, __('Update date')];
+        $cols['posts'][1]['creadt'] = [true, __('Creation date')];
+        $cols['pages'][1]['upddt']  = [true, __('Update date')];
+        $cols['pages'][1]['creadt'] = [true, __('Creation date')];
     }
 
     private static function adminEntryListHeader($core, $rs, $cols)
@@ -54,7 +62,7 @@ class adminmoredates
 
     public static function adminPostsSortbyCombo($container)
     {
-        $container[0][__('Creation date')] = 'post_creadt';
         $container[0][__('Update date')]   = 'post_upddt';
+        $container[0][__('Creation date')] = 'post_creadt';
     }
 }
