@@ -1,9 +1,15 @@
 Dotclear 2 plugin
 =================
 
-This simple plugin allows the display of all posts dates (publication, creation and last update) in admin posts lists
+Ce petit plugin permet d'afficher, dans les listes de billets et de pages, deux colonnes supplémentaires optionnelles :
 
-For public pages, use in templates:
-  <span class="post-date">Date: {{tpl:EntryDate}}.</span>
-  <span class="post-date">Created:{{tpl:EntryDate creadt="1"}}.</span>
-  <span class="post-date">Updated: {{tpl:EntryDate upddt="1"}}.</span>
+- l'une avec la date de création du billet
+- l'autre avec celle de sa dernière mise à jour
+
+Ces options sont disponibles dans Mes Préférences > Mes options > Colonnes optionnelles affichées dans les listes
+
+Côté public, vous pouvez utiliser les balises de template suivantes :
+
+- Date: {{tpl:EntryDate}}
+- Created:{{tpl:EntryDate creadt="1"}}
+- Updated: {{tpl:EntryDate upddt="1"}}
