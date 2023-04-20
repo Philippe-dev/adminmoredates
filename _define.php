@@ -20,7 +20,7 @@ $this->registerModule(
     'Philippe aka amalgame and contributors',
     '1.0',
     [
-        'requires'    => [['core', '2.25']],
+        'requires'    => [['core', '2.26']],
         'permissions' => dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_USAGE,
             dcAuth::PERMISSION_CONTENT_ADMIN,

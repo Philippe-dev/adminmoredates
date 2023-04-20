@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
-use dt;
+use Dotclear\Helper\Date;
 
 class BackendBehaviors
 {
@@ -46,8 +46,8 @@ class BackendBehaviors
 
     public static function adminEntryListValue($core, $rs, $cols)
     {
-        $cols['upddt']  = '<td class="nowrap">' . dt::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
-        $cols['creadt'] = '<td class="nowrap">' . dt::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
+        $cols['upddt']  = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
+        $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
     }
 
     public static function adminPostListValue($rs, $cols)
