@@ -18,7 +18,7 @@ $this->registerModule(
     'Admin More Dates',
     'Display creation and update dates in posts and pages lists',
     'Philippe aka amalgame and contributors',
-    '1.0',
+    '1.1',
     [
         'requires'    => [['core', '2.26']],
         'permissions' => dcCore::app()->auth->makePermissions([
