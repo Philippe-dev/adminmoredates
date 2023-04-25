@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Project-Id-Version: adminmoredates 1.1\n"
+"Project-Id-Version: adminmoredates 1.2\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-25T09:46:08+00:00\n"
+"PO-Revision-Date: 2023-04-25T14:40:00+00:00\n"
 "Last-Translator: Philippe\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,18 @@ msgstr "Mise à jour"
 
 msgid "Created"
 msgstr "Création"
+
+msgid "Admin More Dates"
+msgstr "Plus de dates"
+
+msgid "Activate plugin on this blog"
+msgstr "Activer le plugin sur ce blog"
+
+msgid "Display posts creation date"
+msgstr "Afficher les dates de création des billets"
+
+msgid "Display posts update date"
+msgstr "Afficher les dates de mise à jour des billets"
 
 msgid "Update date and time"
 msgstr "Date et heure de mise à jour"

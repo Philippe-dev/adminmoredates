@@ -22,16 +22,28 @@ class BackendBehaviors
 {
     public static function adminColumnsLists($cols)
     {
-        $cols['posts'][1]['upddt']  = [true, __('Update date')];
-        $cols['posts'][1]['creadt'] = [true, __('Creation date')];
-        $cols['pages'][1]['upddt']  = [true, __('Update date')];
-        $cols['pages'][1]['creadt'] = [true, __('Creation date')];
+        $settings = dcCore::app()->blog->settings->adminmoredates;
+
+        if ($settings->adminmoredates_creadt) {
+            $cols['posts'][1]['creadt'] = [true, __('Creation date')];
+            $cols['pages'][1]['creadt'] = [true, __('Creation date')];
+        }
+        if ($settings->adminmoredates_upddt) {
+            $cols['posts'][1]['upddt'] = [true, __('Update date')];
+            $cols['pages'][1]['upddt'] = [true, __('Update date')];
+        }
     }
 
     private static function adminEntryListHeader($core, $rs, $cols)
     {
-        $cols['upddt']  = '<th scope="col">' . __('Updated') . '</th>';
-        $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
+        $settings = dcCore::app()->blog->settings->adminmoredates;
+
+        if ($settings->adminmoredates_creadt) {
+            $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
+        }
+        if ($settings->adminmoredates_upddt) {
+            $cols['upddt'] = '<th scope="col">' . __('Updated') . '</th>';
+        }
     }
 
     public static function adminPostListHeader($rs, $cols)
@@ -46,8 +58,14 @@ class BackendBehaviors
 
     public static function adminEntryListValue($core, $rs, $cols)
     {
-        $cols['upddt']  = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
-        $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
+        $settings = dcCore::app()->blog->settings->adminmoredates;
+
+        if ($settings->adminmoredates_creadt) {
+            $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
+        }
+        if ($settings->adminmoredates_upddt) {
+            $cols['upddt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
+        }
     }
 
     public static function adminPostListValue($rs, $cols)
@@ -62,7 +80,13 @@ class BackendBehaviors
 
     public static function adminPostsSortbyCombo($container)
     {
-        $container[0][__('Update date')]   = 'post_upddt';
-        $container[0][__('Creation date')] = 'post_creadt';
+        $settings = dcCore::app()->blog->settings->adminmoredates;
+
+        if ($settings->adminmoredates_creadt) {
+            $container[0][__('Creation date')] = 'post_creadt';
+        }
+        if ($settings->adminmoredates_upddt) {
+            $container[0][__('Update date')] = 'post_upddt';
+        }
     }
 }

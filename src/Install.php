@@ -11,9 +11,9 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 
- declare(strict_types=1);
+declare(strict_types=1);
 
- namespace Dotclear\Plugin\adminmoredates;
+namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
 use dcNsProcess;
@@ -41,7 +41,7 @@ class Install extends dcNsProcess
         $settings->put('adminmoredates_enabled', false, 'boolean', 'Enable related entries', false, true);
         $settings->put('adminmoredates_creadt', false, 'boolean', 'Display creation date', false, true);
         $settings->put('adminmoredates_upddt', false, 'boolean', 'Display update date', false, true);
-        
+
         return true;
     }
 }
