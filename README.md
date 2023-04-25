@@ -8,7 +8,7 @@ Ce petit plugin permet d'afficher, dans les listes de billets et de pages, deux 
 
 et de trier les listes suivant ces critères
 
-Ces options sont disponibles dans Mes Préférences > Mes options > Colonnes optionnelles affichées dans les listes
+Il affiche aussi ces dates sous le champ *Date de publication* dans la page d'édition d'un billet.
 
 Côté public, vous pouvez utiliser les balises de template suivantes :
 
