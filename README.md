@@ -13,5 +13,5 @@ Il affiche aussi ces dates sous le champ *Date de publication* dans la page d'é
 Côté public, vous pouvez utiliser les balises de template suivantes :
 
 - Date de publication : {{tpl:EntryDate}}
-- Date de création :{{tpl:EntryDate creadt="1"}}
+- Date de création : {{tpl:EntryDate creadt="1"}}
 - Date de mise à jour : {{tpl:EntryDate upddt="1"}}
