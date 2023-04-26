@@ -72,7 +72,9 @@ class Backend extends dcNsProcess
             dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
 
             dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
+            dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
             dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'postHeaders']);
+            dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'postHeaders']);
         }
 
         return true;
