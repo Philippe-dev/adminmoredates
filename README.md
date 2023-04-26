@@ -1,10 +1,10 @@
 Dotclear 2 plugin
 =================
 
-Ce petit plugin permet d'afficher, dans les listes de billets ou de pages, deux colonnes supplémentaires optionnelles :
+Ce plugin permet d'afficher, dans les listes de billets ou de pages, deux colonnes supplémentaires optionnelles :
 
 - l'une avec la date de création
-- l'autre avec celle de sa dernière mise à jour
+- l'autre avec celle de la dernière mise à jour
 
 et de trier les listes suivant ces critères
 
