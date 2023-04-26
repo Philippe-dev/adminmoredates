@@ -90,7 +90,7 @@ class Backend extends dcNsProcess
                 'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
             ]) .
             '</p>' .
-            '<div><label class="more_dates" for="more_dates">' . __('More dates') . '</label>' .
+            '<div class="more_dates"><label for="more_dates">' . __('More dates') . '</label>' .
                 '<div id="more_dates">' ;
 
             if ($settings->adminmoredates_upddt) {
