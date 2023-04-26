@@ -73,8 +73,8 @@ class Backend extends dcNsProcess
 
             dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
             dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
-            dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'postHeaders']);
-            dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'postHeaders']);
+            dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
+            dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
         }
 
         return true;
@@ -126,7 +126,7 @@ class Backend extends dcNsProcess
         }
     }
 
-    public static function postHeaders(): string
+    public static function adminPostHeaders(): string
     {
         return
         '<script>' . "\n" .
