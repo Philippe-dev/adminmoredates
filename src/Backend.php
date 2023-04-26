@@ -68,10 +68,10 @@ class Backend extends dcNsProcess
             dcCore::app()->addBehavior('adminPagesListHeaderV2', [BackendBehaviors::class, 'adminPagesListHeader']);
             dcCore::app()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
             dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
-        }
 
-        dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
-        dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'postHeaders']);
+            dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
+            dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'postHeaders']);
+        }
 
         return true;
     }
@@ -84,69 +84,61 @@ class Backend extends dcNsProcess
 
             $settings = dcCore::app()->blog->settings->adminmoredates;
 
-            if ($settings->adminmoredates_enabled) {
-                $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
-                form::datetime('post_dt', [
-                    'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_dt))),
-                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+            $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
+            form::datetime('post_dt', [
+                'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_dt))),
+                'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+            ]) .
+            '</p>' .
+            '<div><label class="more_dates" for="more_dates">' . __('More dates') . '</label>' .
+                '<div id="more_dates">' ;
+            if ($settings->adminmoredates_upddt) {
+                $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
+                form::datetime('post_upddt', [
+                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_upddt))),
+                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
+                    'disabled' => true,
                 ]) .
-                '</p>' .
-                '<div><label class="more_dates" for="more_dates">' . __('More dates') . '</label>' .
-                    '<div id="more_dates">' ;
-                if ($settings->adminmoredates_upddt) {
-                    $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
-                    form::datetime('post_upddt', [
-                        'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_upddt))),
-                        'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
-                        'disabled' => true,
-                    ]) .
-                    '</p>';
-                }
+                '</p>';
+            }
 
-                if ($settings->adminmoredates_creadt) {
-                    $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
-                    form::datetime('post_creadt', [
-                        'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_creadt))),
-                        'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
-                        'disabled' => true,
-                    ]) .
-                    '</p>';
-                }
+            if ($settings->adminmoredates_creadt) {
+                $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
+                form::datetime('post_creadt', [
+                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_creadt))),
+                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
+                    'disabled' => true,
+                ]) .
+                '</p>';
+            }
 
-                $item .= '</div>' .
-                '</div>';
+            $item .= '</div>' .
+            '</div>';
 
-                if ($settings->adminmoredates_creadt || $settings->adminmoredates_upddt) {
-                    $sidebar['status-box']['items']['post_dt'] = $item;
-                }
+            if ($settings->adminmoredates_creadt || $settings->adminmoredates_upddt) {
+                $sidebar['status-box']['items']['post_dt'] = $item;
             }
         }
     }
 
     public static function postHeaders(): string
     {
-        $settings = dcCore::app()->blog->settings->adminmoredates;
-
-        if ($settings->adminmoredates_enabled) {
-            return
-            '<script>' . "\n" .
-            '$(document).ready(function() {' . "\n" .
-                '$("#more_dates")' . "\n" .
-                '.parent()' . "\n" .
-                '.children("label")' . "\n" .
-                '.toggleWithLegend($("#more_dates").parent().children().not("label"), {' . "\n" .
-                    'user_pref: "dcx_post_more_dates",' . "\n" .
-                    'legend_click: true,' . "\n" .
-                '});' . "\n" .
+        return
+        '<script>' . "\n" .
+        '$(document).ready(function() {' . "\n" .
+            '$("#more_dates")' . "\n" .
+            '.parent()' . "\n" .
+            '.children("label")' . "\n" .
+            '.toggleWithLegend($("#more_dates").parent().children().not("label"), {' . "\n" .
+                'user_pref: "dcx_post_more_dates",' . "\n" .
+                'legend_click: true,' . "\n" .
             '});' . "\n" .
-            '</script>' .
-            '<style type="text/css">' . "\n" .
-            '.more_dates {' . "\n" .
-            'margin-bottom: .8em;' . "\n" .
-            '}' . "\n" .
-            '</style>';
-        }
-
-        return '';
+        '});' . "\n" .
+        '</script>' .
+        '<style type="text/css">' . "\n" .
+        '.more_dates {' . "\n" .
+        'margin-bottom: .8em;' . "\n" .
+        '}' . "\n" .
+        '</style>';
     }
 }
