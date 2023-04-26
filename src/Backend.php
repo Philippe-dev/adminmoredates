@@ -101,8 +101,6 @@ class Backend extends dcNsProcess
                         'disabled' => true,
                     ]) .
                     '</p>';
-                } else {
-                    $item .= '';
                 }
 
                 if ($settings->adminmoredates_creadt) {
@@ -113,8 +111,6 @@ class Backend extends dcNsProcess
                         'disabled' => true,
                     ]) .
                     '</p>';
-                } else {
-                    $item .= '';
                 }
 
                 $item .= '</div>' .

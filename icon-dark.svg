@@ -11,7 +11,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs36" />
+     id="defs36">
+    <linearGradient
+       id="linearGradient955"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#d0cfeb;stop-opacity:1;"
+         offset="0"
+         id="stop953" />
+    </linearGradient>
+  </defs>
   <sodipodi:namedview
      id="namedview34"
      pagecolor="#ffffff"
@@ -103,4 +112,22 @@
      width="6"
      height="6"
      id="rect30" />
+  <rect
+     style="fill:#ffffff;stroke:#53535c;stroke-width:0.937974;stroke-opacity:1;paint-order:stroke fill markers"
+     id="rect951"
+     width="35.756165"
+     height="20.528479"
+     x="5.9872942"
+     y="17.680071"
+     rx="1.7533985"
+     ry="0.21503073" />
+  <rect
+     style="fill:#f44336;fill-opacity:1;stroke:#b71c1c;stroke-opacity:1;paint-order:stroke fill markers"
+     id="rect1108"
+     width="4.7851057"
+     height="5.1339059"
+     x="30.214893"
+     y="29"
+     rx="1.7534"
+     ry="0.215031" />
 </svg>
