@@ -92,8 +92,8 @@ class Backend extends dcNsProcess
             '</p>' .
             '<div><label class="more_dates" for="more_dates">' . __('More dates') . '</label>' .
                 '<div id="more_dates">' ;
-            
-                if ($settings->adminmoredates_upddt) {
+
+            if ($settings->adminmoredates_upddt) {
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
                     'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_upddt))),
