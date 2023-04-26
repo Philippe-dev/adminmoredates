@@ -22,6 +22,8 @@ use dcAdmin;
 use dcAuth;
 use dcFavorites;
 use dcPage;
+use ArrayObject;
+use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 
@@ -76,7 +78,7 @@ class Backend extends dcNsProcess
         return true;
     }
 
-    public static function adminPostFormItems($main, $sidebar, $post)
+    public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
     {
         if ($post !== null) {
             dcCore::app()->admin->post_upddt  = $post->post_upddt;
