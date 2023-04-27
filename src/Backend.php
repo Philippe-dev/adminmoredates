@@ -86,14 +86,12 @@ class Backend extends dcNsProcess
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
     {
         if ($post !== null) {
-            dcCore::app()->admin->post_upddt  = $post->post_upddt;
-            dcCore::app()->admin->post_creadt = $post->post_creadt;
 
             $settings = dcCore::app()->blog->settings->adminmoredates;
 
             $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
             form::datetime('post_dt', [
-                'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_dt))),
+                'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_dt))),
                 'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
             ]) .
             '</p>' .
@@ -103,7 +101,7 @@ class Backend extends dcNsProcess
             if ($settings->adminmoredates_upddt) {
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
-                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_upddt))),
+                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
                     'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
                     'disabled' => true,
                 ]) .
@@ -113,7 +111,7 @@ class Backend extends dcNsProcess
             if ($settings->adminmoredates_creadt) {
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
-                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) dcCore::app()->admin->post_creadt))),
+                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
                     'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
                     'disabled' => true,
                 ]) .
