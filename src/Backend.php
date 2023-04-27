@@ -64,17 +64,20 @@ class Backend extends dcNsProcess
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
         if ($settings->adminmoredates_enabled) {
-            dcCore::app()->addBehavior('adminColumnsListsV2', [BackendBehaviors::class, 'adminColumnsLists']);
-            dcCore::app()->addBehavior('adminPostListHeaderV2', [BackendBehaviors::class, 'adminPostListHeader']);
-            dcCore::app()->addBehavior('adminPostListValueV2', [BackendBehaviors::class, 'adminPostListValue']);
-            dcCore::app()->addBehavior('adminPagesListHeaderV2', [BackendBehaviors::class, 'adminPagesListHeader']);
-            dcCore::app()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
-            dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
-
-            dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
-            dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
-            dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
-            dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
+            if ($settings->adminmoredates_lists) {
+                dcCore::app()->addBehavior('adminColumnsListsV2', [BackendBehaviors::class, 'adminColumnsLists']);
+                dcCore::app()->addBehavior('adminPostListHeaderV2', [BackendBehaviors::class, 'adminPostListHeader']);
+                dcCore::app()->addBehavior('adminPostListValueV2', [BackendBehaviors::class, 'adminPostListValue']);
+                dcCore::app()->addBehavior('adminPagesListHeaderV2', [BackendBehaviors::class, 'adminPagesListHeader']);
+                dcCore::app()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
+                dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
+            }
+            if ($settings->adminmoredates_posts) {
+                dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
+                dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
+                dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
+                dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
+            }
         }
 
         return true;

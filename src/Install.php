@@ -41,6 +41,8 @@ class Install extends dcNsProcess
         $settings->put('adminmoredates_enabled', false, 'boolean', 'Enable plugin', false, true);
         $settings->put('adminmoredates_creadt', false, 'boolean', 'Display creation date', false, true);
         $settings->put('adminmoredates_upddt', false, 'boolean', 'Display update date', false, true);
+        $settings->put('adminmoredates_lists', false, 'boolean', 'Display on posts lists', false, true);
+        $settings->put('adminmoredates_posts', false, 'boolean', 'Display on post form', false, true);
 
         return true;
     }
