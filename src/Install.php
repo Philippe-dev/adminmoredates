@@ -38,11 +38,11 @@ class Install extends dcNsProcess
 
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
-        $settings->put('adminmoredates_enabled', false, 'boolean', 'Enable plugin', false, true);
-        $settings->put('adminmoredates_creadt', false, 'boolean', 'Display creation date', false, true);
-        $settings->put('adminmoredates_upddt', false, 'boolean', 'Display update date', false, true);
-        $settings->put('adminmoredates_lists', false, 'boolean', 'Display on posts lists', false, true);
-        $settings->put('adminmoredates_posts', false, 'boolean', 'Display on post form', false, true);
+        $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
+        $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);
+        $settings->put('upddt', false, 'boolean', 'Display update date', false, true);
+        $settings->put('lists', false, 'boolean', 'Display on posts lists', false, true);
+        $settings->put('posts', false, 'boolean', 'Display on post form', false, true);
 
         return true;
     }

@@ -24,11 +24,11 @@ class BackendBehaviors
     {
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
-        if ($settings->adminmoredates_creadt) {
+        if ($settings->creadt) {
             $cols['posts'][1]['creadt'] = [true, __('Creation date')];
             $cols['pages'][1]['creadt'] = [true, __('Creation date')];
         }
-        if ($settings->adminmoredates_upddt) {
+        if ($settings->upddt) {
             $cols['posts'][1]['upddt'] = [true, __('Update date')];
             $cols['pages'][1]['upddt'] = [true, __('Update date')];
         }
@@ -38,10 +38,10 @@ class BackendBehaviors
     {
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
-        if ($settings->adminmoredates_creadt) {
+        if ($settings->creadt) {
             $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
         }
-        if ($settings->adminmoredates_upddt) {
+        if ($settings->upddt) {
             $cols['upddt'] = '<th scope="col">' . __('Updated') . '</th>';
         }
     }
@@ -60,10 +60,10 @@ class BackendBehaviors
     {
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
-        if ($settings->adminmoredates_creadt) {
+        if ($settings->creadt) {
             $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
         }
-        if ($settings->adminmoredates_upddt) {
+        if ($settings->upddt) {
             $cols['upddt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_upddt) . '</td>';
         }
     }
@@ -82,10 +82,10 @@ class BackendBehaviors
     {
         $settings = dcCore::app()->blog->settings->adminmoredates;
 
-        if ($settings->adminmoredates_creadt) {
+        if ($settings->creadt) {
             $container[0][__('Creation date')] = 'post_creadt';
         }
-        if ($settings->adminmoredates_upddt) {
+        if ($settings->upddt) {
             $container[0][__('Update date')] = 'post_upddt';
         }
     }

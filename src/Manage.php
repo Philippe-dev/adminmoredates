@@ -30,16 +30,16 @@ class Manage extends dcNsProcess
      */
     public static function init(): bool
     {
-        if (is_null(dcCore::app()->blog->settings->adminmoredates->adminmoredates_enabled)) {
+        if (is_null(dcCore::app()->blog->settings->adminmoredates->enabled)) {
             try {
                 // Add default settings values if necessary
                 $settings = dcCore::app()->blog->settings->adminmoredates;
 
-                $settings->put('adminmoredates_enabled', false, 'boolean', 'Enable plugin', false, true);
-                $settings->put('adminmoredates_creadt', false, 'boolean', 'Display creation date', false, true);
-                $settings->put('adminmoredates_upddt', false, 'boolean', 'Display update date', false, true);
-                $settings->put('adminmoredates_lists', false, 'boolean', 'Display on posts lists', false, true);
-                $settings->put('adminmoredates_posts', false, 'boolean', 'Display on post form', false, true);
+                $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
+                $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);
+                $settings->put('upddt', false, 'boolean', 'Display update date', false, true);
+                $settings->put('lists', false, 'boolean', 'Display on posts lists', false, true);
+                $settings->put('posts', false, 'boolean', 'Display on post form', false, true);
 
                 dcCore::app()->blog->triggerBlog();
                 Http::redirect(dcCore::app()->admin->getPageURL());
@@ -66,11 +66,11 @@ class Manage extends dcNsProcess
 
         // Saving configurations
         if (isset($_POST['save'])) {
-            $settings->put('adminmoredates_enabled', !empty($_POST['adminmoredates_enabled']));
-            $settings->put('adminmoredates_creadt', !empty($_POST['adminmoredates_creadt']));
-            $settings->put('adminmoredates_upddt', !empty($_POST['adminmoredates_upddt']));
-            $settings->put('adminmoredates_lists', !empty($_POST['adminmoredates_lists']));
-            $settings->put('adminmoredates_posts', !empty($_POST['adminmoredates_posts']));
+            $settings->put('enabled', !empty($_POST['enabled']));
+            $settings->put('creadt', !empty($_POST['creadt']));
+            $settings->put('upddt', !empty($_POST['upddt']));
+            $settings->put('lists', !empty($_POST['lists']));
+            $settings->put('posts', !empty($_POST['posts']));
 
             dcCore::app()->blog->triggerBlog();
             Http::redirect(dcCore::app()->admin->getPageURL() . '&upd=1');
@@ -112,23 +112,23 @@ class Manage extends dcNsProcess
         echo
         '<form action="' . dcCore::app()->admin->getPageURL() . '" method="post" id="config-form">' .
         '<div class="fieldset"><h3>' . __('Activation') . '</h3>' .
-            '<p><label class="classic" for="adminmoredates_enabled">' .
-            form::checkbox('adminmoredates_enabled', '1', $settings->adminmoredates_enabled) .
+            '<p><label class="classic" for="enabled">' .
+            form::checkbox('enabled', '1', $settings->enabled) .
             __('Activate plugin on this blog') . '</label></p>' .
         '</div>' .
         '<div class="fieldset"><h3>' . __('Dates') . '</h3>' .
-            '<p><label class="classic" for="adminmoredates_creadt">' .
-            form::checkbox('adminmoredates_creadt', '1', $settings->adminmoredates_creadt) .
+            '<p><label class="classic" for="creadt">' .
+            form::checkbox('creadt', '1', $settings->creadt) .
             __('Display posts creation date') . '</label></p>' .
-            '<p><label class="classic" for="adminmoredates_upddt">' .
-            form::checkbox('adminmoredates_upddt', '1', $settings->adminmoredates_upddt) .
+            '<p><label class="classic" for="upddt">' .
+            form::checkbox('upddt', '1', $settings->upddt) .
             __('Display posts update date') . '</label></p>' .
         '</div>' . '<div class="fieldset"><h3>' . __('Places') . '</h3>' .
-            '<p><label class="classic" for="adminmoredates_lists">' .
-            form::checkbox('adminmoredates_lists', '1', $settings->adminmoredates_lists) .
+            '<p><label class="classic" for="lists">' .
+            form::checkbox('lists', '1', $settings->lists) .
             __('Display dates on posts lists') . '</label></p>' .
-            '<p><label class="classic" for="adminmoredates_posts">' .
-            form::checkbox('adminmoredates_posts', '1', $settings->adminmoredates_posts) .
+            '<p><label class="classic" for="posts">' .
+            form::checkbox('posts', '1', $settings->posts) .
             __('Display dates on post form') . '</label></p>' .
         '</div>';
 
