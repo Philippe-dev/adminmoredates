@@ -40,11 +40,11 @@ msgstr "Activer le plugin sur ce blog"
 msgid "Places"
 msgstr "Emplacements"
 
-msgid "Display on posts lists"
-msgstr "Afficher dans les listes de billets"
+msgid "Display dates on posts lists"
+msgstr "Afficher les dates dans les listes de billets"
 
-msgid "Display on post form"
-msgstr "Afficher dans la page d'édition des billets"
+msgid "Display dates on post form"
+msgstr "Afficher les dates dans la page d'édition des billets"
 
 msgid "Dates"
 msgstr "Dates"
