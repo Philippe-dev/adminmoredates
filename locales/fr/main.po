@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: adminmoredates 2.0\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-27T14:02:30+00:00\n"
+"PO-Revision-Date: 2023-04-27T15:50:46+00:00\n"
 "Last-Translator: Philippe\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,10 +11,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Admin More Dates"
-msgstr "Plus de dates"
+msgstr "Dates supplémentaires"
 
 msgid "More dates"
-msgstr "Autres dates"
+msgstr "Dates supplémentaires"
 
 msgid "Update date and hour"
 msgstr "Date et heure de mise à jour"
@@ -37,15 +37,6 @@ msgstr "Mise à jour"
 msgid "Activate plugin on this blog"
 msgstr "Activer le plugin sur ce blog"
 
-msgid "Places"
-msgstr "Emplacements"
-
-msgid "Display dates on posts lists"
-msgstr "Afficher les dates dans les listes de billets"
-
-msgid "Display dates on post form"
-msgstr "Afficher les dates dans la page d'édition des billets"
-
 msgid "Dates"
 msgstr "Dates"
 
@@ -54,6 +45,15 @@ msgstr "Afficher les dates de création des billets"
 
 msgid "Display posts update date"
 msgstr "Afficher les dates de mise à jour des billets"
+
+msgid "Places"
+msgstr "Emplacements"
+
+msgid "Display dates on posts lists"
+msgstr "Afficher les dates dans les listes de billets"
+
+msgid "Display dates on post form"
+msgstr "Afficher les dates dans la page d'édition des billets"
 
 msgid "Update date and time"
 msgstr "Date et heure de mise à jour"
