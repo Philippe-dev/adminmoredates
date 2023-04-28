@@ -24,6 +24,7 @@ use dcAuth;
 use dcFavorites;
 use dcPage;
 use ArrayObject;
+use Exception;
 use Dotclear\Database\{
     Cursor,
     MetaRecord

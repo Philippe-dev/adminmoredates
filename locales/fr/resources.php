@@ -11,5 +11,5 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 if (!isset(dcCore::app()->resources['help']['adminmoredatesconfig'])) {
-    dcCore::app()->resources['help']['adminmoredatesconfig'] = dirname(__FILE__) . '/help/adminmoredatesconfig.html';
+    dcCore::app()->resources['help']['adminmoredatesconfig'] = __DIR__ . '/help/adminmoredatesconfig.html';
 }
