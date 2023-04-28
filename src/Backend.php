@@ -85,6 +85,7 @@ class Backend extends dcNsProcess
                 dcCore::app()->addBehavior('adminAfterPageUpdate', [self::class,  'adminAfterPostUpdate']);
             }
         }
+
         if (!empty($_REQUEST['id'])) {
             $params['post_id']         = $_REQUEST['id'];
             dcCore::app()->admin->post = dcCore::app()->blog->getPosts($params);
@@ -94,6 +95,7 @@ class Backend extends dcNsProcess
             dcCore::app()->admin->post_upddt    = (int) dcCore::app()->admin->post->post_upddt;
             dcCore::app()->admin->can_edit_page = dcCore::app()->admin->post->isEditable();
         }
+
         if (!empty($_POST) && dcCore::app()->admin->can_edit_page) {
             // Format content
 
