@@ -103,7 +103,6 @@ class Backend extends dcNsProcess
                 form::datetime('post_upddt', [
                     'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
                     'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
-                    'disabled' => true,
                 ]) .
                 '</p>';
             }
@@ -113,7 +112,6 @@ class Backend extends dcNsProcess
                 form::datetime('post_creadt', [
                     'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
                     'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
-                    'disabled' => true,
                 ]) .
                 '</p>';
             }
