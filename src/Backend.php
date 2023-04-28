@@ -89,10 +89,10 @@ class Backend extends dcNsProcess
             $params['post_id']         = $_REQUEST['id'];
             dcCore::app()->admin->post = dcCore::app()->blog->getPosts($params);
 
-            dcCore::app()->admin->post_id            = (int) dcCore::app()->admin->post->post_id;
-            dcCore::app()->admin->post_creadt        = (int) dcCore::app()->admin->post->post_creadt;
-            dcCore::app()->admin->post_upddt        = (int) dcCore::app()->admin->post->post_upddt;
-            dcCore::app()->admin->can_edit_page      = dcCore::app()->admin->post->isEditable();
+            dcCore::app()->admin->post_id       = (int) dcCore::app()->admin->post->post_id;
+            dcCore::app()->admin->post_creadt   = (int) dcCore::app()->admin->post->post_creadt;
+            dcCore::app()->admin->post_upddt    = (int) dcCore::app()->admin->post->post_upddt;
+            dcCore::app()->admin->can_edit_page = dcCore::app()->admin->post->isEditable();
         }
         if (!empty($_POST) && dcCore::app()->admin->can_edit_page) {
             // Format content
@@ -140,7 +140,7 @@ class Backend extends dcNsProcess
         if (!isset($_POST['post_creadt']) || $post_id === null) {
             return;
         }
-        $cur = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
+        $cur              = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
         $cur->post_creadt = dcCore::app()->admin->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_creadt);
 
         $cur->update(
@@ -153,7 +153,7 @@ class Backend extends dcNsProcess
         if (!isset($_POST['post_upddt']) || $post_id === null) {
             return;
         }
-        $cur = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
+        $cur             = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
         $cur->post_upddt = dcCore::app()->admin->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_upddt);
 
         $cur->update(
@@ -181,7 +181,6 @@ class Backend extends dcNsProcess
                 form::datetime('post_upddt', [
                     'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
                     'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
-
                 ]) .
                 '</p>';
             }
@@ -189,9 +188,8 @@ class Backend extends dcNsProcess
             if ($settings->creadt) {
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
-                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
-                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
-                    'disabled' => true,
+                    'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
+                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
                 ]) .
                 '</p>';
             }
@@ -212,7 +210,6 @@ class Backend extends dcNsProcess
         return '<style type="text/css">' . "\n" .
         '.more_dates {margin: 0 0 1em 0;}' . "\n" .
         '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
-        '.today_helper{min-width: 12em}' . "\n" .
         '</style>' .
         '<script src="' . $url . '/js/adminmoredates.js"><script>';
     }
