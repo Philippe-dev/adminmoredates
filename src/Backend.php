@@ -143,7 +143,7 @@ class Backend extends dcNsProcess
         '</script>' .
         '<style type="text/css">' . "\n" .
         '.more_dates {' . "\n" .
-        'margin-bottom: .8em;' . "\n" .
+        'margin-bottom: 1em;' . "\n" .
         '}' . "\n" .
         '</style>';
     }
