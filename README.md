@@ -7,7 +7,7 @@ Ce plugin permet d'afficher, dans les listes de billets ou de pages, deux colonn
 
 et de trier les listes suivant ces critères
 
-Il affiche aussi ces dates sous le champ _Date de publication_ dans la page d'édition d'un billet ou d'une page, et permet aussi de les modifier.
+Il affiche aussi ces dates sous le champ _Date de publication_ dans la page d'édition d'un billet ou d'une page, et permet de les modifier.
 
 Côté public, vous pouvez utiliser les balises de template suivantes :
 
