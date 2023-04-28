@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
+use dcBlog;
 use dcNsProcess;
 use form;
 use dcAdmin;
@@ -23,7 +24,10 @@ use dcAuth;
 use dcFavorites;
 use dcPage;
 use ArrayObject;
-use Dotclear\Database\MetaRecord;
+use Dotclear\Database\{
+    Cursor,
+    MetaRecord
+};
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 
@@ -77,10 +81,85 @@ class Backend extends dcNsProcess
                 dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
                 dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
                 dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
+                dcCore::app()->addBehavior('adminAfterPostUpdate', [self::class,  'adminAfterPostUpdate']);
+                dcCore::app()->addBehavior('adminAfterPageUpdate', [self::class,  'adminAfterPostUpdate']);
+            }
+        }
+        if (!empty($_REQUEST['id'])) {
+            $params['post_id']         = $_REQUEST['id'];
+            dcCore::app()->admin->post = dcCore::app()->blog->getPosts($params);
+
+            dcCore::app()->admin->post_id            = (int) dcCore::app()->admin->post->post_id;
+            dcCore::app()->admin->post_creadt        = (int) dcCore::app()->admin->post->post_creadt;
+            dcCore::app()->admin->post_upddt        = (int) dcCore::app()->admin->post->post_upddt;
+            dcCore::app()->admin->can_edit_page      = dcCore::app()->admin->post->isEditable();
+        }
+        if (!empty($_POST) && dcCore::app()->admin->can_edit_page) {
+            // Format content
+
+            if (empty($_POST['post_creadt'])) {
+                dcCore::app()->admin->post_creadt = '';
+            } else {
+                try {
+                    dcCore::app()->admin->post_creadt = strtotime($_POST['post_creadt']);
+                    if (!dcCore::app()->admin->post_creadt || dcCore::app()->admin->post_creadt == -1) {
+                        dcCore::app()->admin->bad_dt = true;
+
+                        throw new Exception(__('Invalid publication date'));
+                    }
+                    dcCore::app()->admin->post_creadt = date('Y-m-d H:i', dcCore::app()->admin->post_creadt);
+                } catch (Exception $e) {
+                    dcCore::app()->error->add($e->getMessage());
+                }
+            }
+
+            if (empty($_POST['post_upddt'])) {
+                dcCore::app()->admin->post_upddt = '';
+            } else {
+                try {
+                    dcCore::app()->admin->post_upddt = strtotime($_POST['post_upddt']);
+                    if (!dcCore::app()->admin->post_upddt || dcCore::app()->admin->post_upddt == -1) {
+                        dcCore::app()->admin->bad_dt = true;
+
+                        throw new Exception(__('Invalid publication date'));
+                    }
+                    dcCore::app()->admin->post_upddt = date('Y-m-d H:i', dcCore::app()->admin->post_upddt);
+                } catch (Exception $e) {
+                    dcCore::app()->error->add($e->getMessage());
+                }
             }
         }
 
         return true;
+    }
+
+    public static function adminAfterPostUpdate(Cursor $cur, ?int $post_id): void
+    {
+        //creation date
+
+        if (!isset($_POST['post_creadt']) || $post_id === null) {
+            return;
+        }
+        $cur = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
+        $cur->post_creadt = dcCore::app()->admin->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_creadt);
+
+        $cur->update(
+            'WHERE post_id = ' . dcCore::app()->admin->post_id . ' ' .
+            "AND blog_id = '" . dcCore::app()->con->escapeStr(dcCore::app()->blog->id) . "' "
+        );
+
+        //update date
+
+        if (!isset($_POST['post_upddt']) || $post_id === null) {
+            return;
+        }
+        $cur = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
+        $cur->post_upddt = dcCore::app()->admin->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_upddt);
+
+        $cur->update(
+            'WHERE post_id = ' . dcCore::app()->admin->post_id . ' ' .
+            "AND blog_id = '" . dcCore::app()->con->escapeStr(dcCore::app()->blog->id) . "' "
+        );
     }
 
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
