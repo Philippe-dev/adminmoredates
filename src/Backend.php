@@ -102,7 +102,7 @@ class Backend extends dcNsProcess
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
                     'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
-                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
+                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
                     'disabled' => true,
                 ]) .
                 '</p>';
@@ -112,7 +112,7 @@ class Backend extends dcNsProcess
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
                     'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
-                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
+                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
                     'disabled' => true,
                 ]) .
                 '</p>';
