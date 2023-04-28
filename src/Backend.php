@@ -135,6 +135,6 @@ class Backend extends dcNsProcess
         '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
         '.today_helper{min-width: 12em}' . "\n" .
         '</style>' .
-        '<script src="'.$url . '/js/adminmoredates.js"><script>';
+        '<script src="' . $url . '/js/adminmoredates.js"><script>';
     }
 }
