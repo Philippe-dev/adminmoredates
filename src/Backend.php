@@ -138,9 +138,13 @@ class Backend extends dcNsProcess
 
     public static function adminAfterPostUpdate(Cursor $cur, ?int $post_id): void
     {
+        if (is_null($post_id)) {
+            return;
+        }
+
         //creation date
 
-        if (!isset($_POST['post_creadt']) || $post_id === null) {
+        if (!isset($_POST['post_creadt'])) {
             return;
         }
         $cur              = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
@@ -153,7 +157,7 @@ class Backend extends dcNsProcess
 
         //update date
 
-        if (!isset($_POST['post_upddt']) || $post_id === null) {
+        if (!isset($_POST['post_upddt'])) {
             return;
         }
         $cur             = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
