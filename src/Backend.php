@@ -145,6 +145,7 @@ class Backend extends dcNsProcess
         '.more_dates {' . "\n" .
         'margin-bottom: 1em;' . "\n" .
         '}' . "\n" .
+        '#more_dates:first-of-type label {margin-top:.5em}' . "\n" .
         '</style>';
     }
 }
