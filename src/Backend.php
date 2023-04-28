@@ -86,7 +86,6 @@ class Backend extends dcNsProcess
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
     {
         if ($post !== null) {
-
             $settings = dcCore::app()->blog->settings->adminmoredates;
 
             $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
@@ -101,9 +100,9 @@ class Backend extends dcNsProcess
             if ($settings->upddt) {
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
-                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
-                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
-                    'disabled' => true,
+                    'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
+                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+
                 ]) .
                 '</p>';
             }
@@ -111,9 +110,9 @@ class Backend extends dcNsProcess
             if ($settings->creadt) {
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
-                    'default'  => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
-                    'class'    => (dcCore::app()->admin->bad_dt ? 'invalid' : 'maximal'),
-                    'disabled' => true,
+                    'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
+                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+
                 ]) .
                 '</p>';
             }
@@ -129,23 +128,13 @@ class Backend extends dcNsProcess
 
     public static function adminPostHeaders(): string
     {
-        return
-        '<script>' . "\n" .
-        '$(document).ready(function() {' . "\n" .
-            '$("#more_dates")' . "\n" .
-            '.parent()' . "\n" .
-            '.children("label")' . "\n" .
-            '.toggleWithLegend($("#more_dates").parent().children().not("label"), {' . "\n" .
-                'user_pref: "dcx_post_more_dates",' . "\n" .
-                'legend_click: true,' . "\n" .
-            '});' . "\n" .
-        '});' . "\n" .
-        '</script>' .
-        '<style type="text/css">' . "\n" .
-        '.more_dates {' . "\n" .
-        'margin-bottom: 1em;' . "\n" .
-        '}' . "\n" .
-        '#more_dates:first-of-type label {margin-top:.5em}' . "\n" .
-        '</style>';
+        $url = dcCore::app()->blog->getQmarkURL() . 'pf=adminmoredates';
+
+        return '<style type="text/css">' . "\n" .
+        '.more_dates {margin: 0 0 1em 0;}' . "\n" .
+        '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
+        '.today_helper{min-width: 12em}' . "\n" .
+        '</style>' .
+        '<script src="'.$url . '/js/adminmoredates.js"><script>';
     }
 }
