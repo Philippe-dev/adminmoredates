@@ -217,7 +217,8 @@ class Backend extends dcNsProcess
         return '<style type="text/css">' . "\n" .
         '.more_dates {margin: 0 0 1em 0;}' . "\n" .
         '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
+        '.today_helper{min-width: 12.5em}' . "\n" .
         '</style>' .
-        '<script src="' . $url . '/js/adminmoredates.js"><script>';
+        '<script src="' . $url . '/js/adminmoredates.js"></script>';
     }
 }
