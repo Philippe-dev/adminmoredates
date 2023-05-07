@@ -23,25 +23,29 @@ $(document).ready(function () {
         field.value = now.toISOString().slice(0, 16);
     };
 
-    const creadtTodayButtonTemplate = new DOMParser().parseFromString(
-        `<button type="button" class="dt-today" title="${dotclear.msg.set_today}"><span class="sr-only">${dotclear.msg.set_today}</span></button>`,
-        "text/html"
-    ).body.firstChild;
+    if (document.querySelector("#post_creadt")) {
+        const creadtTodayButtonTemplate = new DOMParser().parseFromString(
+            `<button type="button" class="dt-today" title="${dotclear.msg.set_today}"><span class="sr-only">${dotclear.msg.set_today}</span></button>`,
+            "text/html"
+        ).body.firstChild;
 
-    const creadtField = document.querySelector("#post_creadt");
-    const creadtbutton = creadtTodayButtonTemplate.cloneNode(true);
-    creadtField.after(creadtbutton);
-    creadtField.classList.add("today_helper");
-    creadtbutton.addEventListener("click", creadtTodayHelper);
+        const creadtField = document.querySelector("#post_creadt");
+        const creadtbutton = creadtTodayButtonTemplate.cloneNode(true);
+        creadtField.after(creadtbutton);
+        creadtField.classList.add("today_helper");
+        creadtbutton.addEventListener("click", creadtTodayHelper);
+    }
 
-    const upddtTodayButtonTemplate = new DOMParser().parseFromString(
-        `<button type="button" class="dt-today" title="${dotclear.msg.set_today}"><span class="sr-only">${dotclear.msg.set_today}</span></button>`,
-        "text/html"
-    ).body.firstChild;
+    if (document.querySelector("#post_upddt")) {
+        const upddtTodayButtonTemplate = new DOMParser().parseFromString(
+            `<button type="button" class="dt-today" title="${dotclear.msg.set_today}"><span class="sr-only">${dotclear.msg.set_today}</span></button>`,
+            "text/html"
+        ).body.firstChild;
 
-    const upddtField = document.querySelector("#post_upddt");
-    const upddtbutton = upddtTodayButtonTemplate.cloneNode(true);
-    upddtField.after(upddtbutton);
-    upddtField.classList.add("today_helper");
-    upddtbutton.addEventListener("click", upddtTodayHelper);
+        const upddtField = document.querySelector("#post_upddt");
+        const upddtbutton = upddtTodayButtonTemplate.cloneNode(true);
+        upddtField.after(upddtbutton);
+        upddtField.classList.add("today_helper");
+        upddtbutton.addEventListener("click", upddtTodayHelper);
+    }
 });
