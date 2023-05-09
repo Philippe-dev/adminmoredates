@@ -52,7 +52,7 @@ class Backend extends dcNsProcess
             dcCore::app()->adminurl->get('admin.plugin.' . My::id()),
             [dcPage::getPF(My::id() . '/icon.svg'), dcPage::getPF(My::id() . '/icon-dark.svg')],
             preg_match('/' . preg_quote(dcCore::app()->adminurl->get('admin.plugin.' . My::id())) . '(&.*)?$/', $_SERVER['REQUEST_URI']),
-            dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([dcAuth::PERMISSION_CONTENT_ADMIN]), dcCore::app()->blog->id)
+            My::checkContext(My::BACKEND),
         );
 
         /* Register favorite */
@@ -62,7 +62,7 @@ class Backend extends dcNsProcess
                 'url'         => dcCore::app()->adminurl->get('admin.plugin.'.My::id()),
                 'small-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
                 'large-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
-                'permissions' => dcCore::app()->auth->makePermissions([dcAuth::PERMISSION_CONTENT_ADMIN]),
+                'permissions' => My::checkContext(My::BACKEND),
             ]);
         });
 
