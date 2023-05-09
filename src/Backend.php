@@ -36,7 +36,7 @@ class Backend extends dcNsProcess
 {
     public static function init(): bool
     {
-        self::$init = defined('DC_CONTEXT_ADMIN');
+        self::$init = My::checkContext(My::BACKEND);
 
         return self::$init;
     }

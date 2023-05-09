@@ -48,7 +48,7 @@ class Manage extends dcNsProcess
             }
         }
 
-        self::$init = true;
+        self::$init = My::checkContext(My::MANAGE);
 
         return self::$init;
     }
