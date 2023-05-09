@@ -35,7 +35,7 @@ class Install extends dcNsProcess
             return false;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id())
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
         $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);

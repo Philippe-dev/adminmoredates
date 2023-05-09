@@ -91,14 +91,14 @@ class Manage extends dcNsProcess
         $settings = dcCore::app()->blog->settings->get(My::id());
 
         dcPage::openModule(
-            __('Admin More Dates'),
+            My::name(),
             dcPage::jsConfirmClose('config-form')
         );
 
         echo dcPage::breadcrumb(
             [
                 Html::escapeHTML(dcCore::app()->blog->name) => '',
-                __('Admin More Dates')                      => '',
+                My::name()                                  => '',
             ]
         ) .
         dcPage::notices();

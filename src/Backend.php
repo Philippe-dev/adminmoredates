@@ -48,20 +48,20 @@ class Backend extends dcNsProcess
         }
 
         dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
-            __('Admin More Dates'),
-            dcCore::app()->adminurl->get('admin.plugin.adminmoredates'),
-            [dcPage::getPF('adminmoredates/icon.svg'), dcPage::getPF('adminmoredates/icon-dark.svg')],
-            preg_match('/' . preg_quote(dcCore::app()->adminurl->get('admin.plugin.adminmoredates')) . '(&.*)?$/', $_SERVER['REQUEST_URI']),
+            My::name(),
+            dcCore::app()->adminurl->get('admin.plugin.' . My::id()),
+            [dcPage::getPF(My::id() . '/icon.svg'), dcPage::getPF(My::id() . '/icon-dark.svg')],
+            preg_match('/' . preg_quote(dcCore::app()->adminurl->get('admin.plugin.' . My::id())) . '(&.*)?$/', $_SERVER['REQUEST_URI']),
             dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([dcAuth::PERMISSION_CONTENT_ADMIN]), dcCore::app()->blog->id)
         );
 
         /* Register favorite */
         dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (dcFavorites $favs) {
-            $favs->register('adminmoredates', [
-                'title'       => __('Admin More Dates'),
-                'url'         => dcCore::app()->adminurl->get('admin.plugin.adminmoredates'),
-                'small-icon'  => [dcPage::getPF('adminmoredates/icon.svg'), dcPage::getPF('adminmoredates/icon-dark.svg')],
-                'large-icon'  => [dcPage::getPF('adminmoredates/icon.svg'), dcPage::getPF('adminmoredates/icon-dark.svg')],
+            $favs->register(My::id(), [
+                'title'       => My::name(),
+                'url'         => dcCore::app()->adminurl->get('admin.plugin.'.My::id()),
+                'small-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
+                'large-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
                 'permissions' => dcCore::app()->auth->makePermissions([dcAuth::PERMISSION_CONTENT_ADMIN]),
             ]);
         });
