@@ -42,7 +42,7 @@ class Manage extends dcNsProcess
                 $settings->put('posts', false, 'boolean', 'Display on post form', false, true);
 
                 dcCore::app()->blog->triggerBlog();
-                Http::redirect(dcCore::app()->admin->getPageURL());
+                Http::redirect(My::url());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -73,7 +73,7 @@ class Manage extends dcNsProcess
             $settings->put('posts', !empty($_POST['posts']));
 
             dcCore::app()->blog->triggerBlog();
-            Http::redirect(dcCore::app()->admin->getPageURL() . '&upd=1');
+            Http::redirect(My::url() . '&upd=1');
         }
 
         return true;
@@ -110,7 +110,7 @@ class Manage extends dcNsProcess
         // Config tab
 
         echo
-        '<form action="' . dcCore::app()->admin->getPageURL() . '" method="post" id="config-form">' .
+        '<form action="' . My::url() . '" method="post" id="config-form">' .
         '<div class="fieldset"><h3>' . __('Activation') . '</h3>' .
             '<p><label class="classic" for="enabled">' .
             form::checkbox('enabled', '1', $settings->enabled) .

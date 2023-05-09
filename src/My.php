@@ -50,6 +50,14 @@ class My
     }
 
     /**
+     * This module admin url
+     */
+    public static function url(): string
+    {
+        return dcCore::app()->admin->getPageURL();
+    }
+
+    /**
      * Check php version
      */
     public static function phpCompliant(): bool
