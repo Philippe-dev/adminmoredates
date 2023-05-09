@@ -30,10 +30,10 @@ class Manage extends dcNsProcess
      */
     public static function init(): bool
     {
-        if (is_null(dcCore::app()->blog->settings->adminmoredates->enabled)) {
+        if (is_null(dcCore::app()->blog->settings->get(My::id())->enabled)) {
             try {
                 // Add default settings values if necessary
-                $settings = dcCore::app()->blog->settings->adminmoredates;
+                $settings = dcCore::app()->blog->settings->get(My::id());
 
                 $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
                 $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);
@@ -62,7 +62,7 @@ class Manage extends dcNsProcess
             return false;
         }
 
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         // Saving configurations
         if (isset($_POST['save'])) {
@@ -88,7 +88,7 @@ class Manage extends dcNsProcess
             return;
         }
 
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         dcPage::openModule(
             __('Admin More Dates'),

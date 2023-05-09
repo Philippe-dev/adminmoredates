@@ -22,7 +22,7 @@ class BackendBehaviors
 {
     public static function adminColumnsLists($cols)
     {
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         if ($settings->creadt) {
             $cols['posts'][1]['creadt'] = [true, __('Creation date')];
@@ -36,7 +36,7 @@ class BackendBehaviors
 
     private static function adminEntryListHeader($core, $rs, $cols)
     {
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         if ($settings->creadt) {
             $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
@@ -58,7 +58,7 @@ class BackendBehaviors
 
     public static function adminEntryListValue($core, $rs, $cols)
     {
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         if ($settings->creadt) {
             $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
@@ -80,7 +80,7 @@ class BackendBehaviors
 
     public static function adminPostsSortbyCombo($container)
     {
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         if ($settings->creadt) {
             $container[0][__('Creation date')] = 'post_creadt';

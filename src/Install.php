@@ -22,10 +22,9 @@ class Install extends dcNsProcess
 {
     public static function init(): bool
     {
-        $module = basename(dirname(__DIR__));
-        $check  = dcCore::app()->newVersion($module, dcCore::app()->plugins->moduleInfo($module, 'version'));
+        $check  = dcCore::app()->newVersion(My::id(), dcCore::app()->plugins->moduleInfo(My::id(), 'version'));
 
-        self::$init = defined('DC_CONTEXT_ADMIN') && $check;
+        self::$init = My::checkContext(My::INSTALL);
 
         return self::$init;
     }
@@ -36,7 +35,7 @@ class Install extends dcNsProcess
             return false;
         }
 
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id())
 
         $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
         $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);

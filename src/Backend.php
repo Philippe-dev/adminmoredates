@@ -66,7 +66,7 @@ class Backend extends dcNsProcess
             ]);
         });
 
-        $settings = dcCore::app()->blog->settings->adminmoredates;
+        $settings = dcCore::app()->blog->settings->get(My::id());
 
         if ($settings->enabled) {
             if ($settings->lists) {
@@ -172,7 +172,7 @@ class Backend extends dcNsProcess
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
     {
         if ($post !== null) {
-            $settings = dcCore::app()->blog->settings->adminmoredates;
+            $settings = dcCore::app()->blog->settings->get(My::id());
 
             $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
             form::datetime('post_dt', [
