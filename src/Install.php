@@ -22,16 +22,14 @@ class Install extends dcNsProcess
 {
     public static function init(): bool
     {
-        $check  = dcCore::app()->newVersion(My::id(), dcCore::app()->plugins->moduleInfo(My::id(), 'version'));
+        static::$init = My::checkContext(My::INSTALL);
 
-        self::$init = My::checkContext(My::INSTALL);
-
-        return self::$init;
+        return static::$init;
     }
 
     public static function process(): bool
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return false;
         }
 
