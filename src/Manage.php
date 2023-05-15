@@ -19,7 +19,16 @@ use dcCore;
 use dcNsProcess;
 use dcPage;
 use Exception;
-use form;
+use Dotclear\Helper\Html\Form\Fieldset;
+use Dotclear\Helper\Html\Form\Legend;
+use Dotclear\Helper\Html\Form\Form;
+use Dotclear\Helper\Html\Form\Checkbox;
+use Dotclear\Helper\Html\Form\Input;
+use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Para;
+use Dotclear\Helper\Html\Form\Radio;
+use Dotclear\Helper\Html\Form\Submit;
+use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Network\Http;
 
@@ -110,6 +119,57 @@ class Manage extends dcNsProcess
         // Config tab
 
         echo
+        (new Form('a11y_params'))
+            ->action(dcCore::app()->admin->getPageURL())
+            ->method('post')
+            ->fields([
+                (new Fieldset('activation'))
+                ->legend((new Legend(__('Activation'))))
+                ->fields([
+                    (new Para())->items([
+                        (new Checkbox('enabled', $settings->enabled))
+                            ->value(1)
+                            ->label((new Label(__('Activate plugin on this blog'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                ]),
+                (new Fieldset('dates'))
+                ->legend((new Legend(__('Dates'))))
+                ->fields([
+                    (new Para())->items([
+                        (new Checkbox('creadt', $settings->creadt))
+                            ->value(1)
+                            ->label((new Label(__('Display posts creation date'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                    (new Para())->items([
+                        (new Checkbox('upddt', $settings->upddt))
+                            ->value(1)
+                            ->label((new Label(__('Display posts update date'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                ]),
+                (new Fieldset('places'))
+                ->legend((new Legend(__('Places'))))
+                ->fields([
+                    (new Para())->items([
+                        (new Checkbox('lists', $settings->lists))
+                            ->value(1)
+                            ->label((new Label(__('Display dates on posts lists'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                    (new Para())->items([
+                        (new Checkbox('posts', $settings->posts))
+                            ->value(1)
+                            ->label((new Label(__('Display dates on post form'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                ]),
+                // Submit
+                (new Para())->items([
+                    (new Submit(['save']))
+                        ->value(__('Save configuration')),
+                    dcCore::app()->formNonce(false),
+                ]),
+            ])
+        ->render();
+
+        /*echo
         '<form action="' . My::url() . '" method="post" id="config-form">' .
         '<div class="fieldset"><h3>' . __('Activation') . '</h3>' .
             '<p><label class="classic" for="enabled">' .
@@ -134,7 +194,7 @@ class Manage extends dcNsProcess
 
         echo
         '<p class="clear"><input type="submit" name="save" value="' . __('Save configuration') . '" />' . dcCore::app()->formNonce() . '</p>' .
-        '</form>' .
+        '</form>' .*/
 
         dcPage::helpBlock('adminmoredatesconfig');
         dcPage::closeModule();
