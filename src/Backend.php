@@ -212,13 +212,11 @@ class Backend extends dcNsProcess
 
     public static function adminPostHeaders(): string
     {
-        $url = dcCore::app()->blog->getQmarkURL() . 'pf=adminmoredates';
-
         return '<style type="text/css">' . "\n" .
         '.more_dates {margin: 0 0 1em 0;}' . "\n" .
         '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
         '.today_helper{min-width: 12.5em}' . "\n" .
         '</style>' .
-        '<script src="' . $url . '/js/adminmoredates.js"></script>';
+        dcPage::jsModuleLoad(My::id() . '/js/adminmoredates.js');
     }
 }

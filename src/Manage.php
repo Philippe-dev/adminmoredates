@@ -113,8 +113,6 @@ class Manage extends dcNsProcess
             dcPage::success(__('Configuration successfully saved'));
         }
 
-        // Config tab
-
         echo
         (new Form('config-form'))
             ->action(dcCore::app()->admin->getPageURL())
