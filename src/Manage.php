@@ -119,7 +119,7 @@ class Manage extends dcNsProcess
         // Config tab
 
         echo
-        (new Form('a11y_params'))
+        (new Form('config-form'))
             ->action(dcCore::app()->admin->getPageURL())
             ->method('post')
             ->fields([
@@ -168,33 +168,6 @@ class Manage extends dcNsProcess
                 ]),
             ])
         ->render();
-
-        /*echo
-        '<form action="' . My::url() . '" method="post" id="config-form">' .
-        '<div class="fieldset"><h3>' . __('Activation') . '</h3>' .
-            '<p><label class="classic" for="enabled">' .
-            form::checkbox('enabled', '1', $settings->enabled) .
-            __('Activate plugin on this blog') . '</label></p>' .
-        '</div>' .
-        '<div class="fieldset"><h3>' . __('Dates') . '</h3>' .
-            '<p><label class="classic" for="creadt">' .
-            form::checkbox('creadt', '1', $settings->creadt) .
-            __('Display posts creation date') . '</label></p>' .
-            '<p><label class="classic" for="upddt">' .
-            form::checkbox('upddt', '1', $settings->upddt) .
-            __('Display posts update date') . '</label></p>' .
-        '</div>' . '<div class="fieldset"><h3>' . __('Places') . '</h3>' .
-            '<p><label class="classic" for="lists">' .
-            form::checkbox('lists', '1', $settings->lists) .
-            __('Display dates on posts lists') . '</label></p>' .
-            '<p><label class="classic" for="posts">' .
-            form::checkbox('posts', '1', $settings->posts) .
-            __('Display dates on post form') . '</label></p>' .
-        '</div>';
-
-        echo
-        '<p class="clear"><input type="submit" name="save" value="' . __('Save configuration') . '" />' . dcCore::app()->formNonce() . '</p>' .
-        '</form>' .*/
 
         dcPage::helpBlock('adminmoredatesconfig');
         dcPage::closeModule();
