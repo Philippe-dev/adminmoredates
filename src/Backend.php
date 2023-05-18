@@ -20,7 +20,6 @@ use dcBlog;
 use dcNsProcess;
 use form;
 use dcAdmin;
-use dcAuth;
 use dcFavorites;
 use dcPage;
 use ArrayObject;
@@ -59,9 +58,9 @@ class Backend extends dcNsProcess
         dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (dcFavorites $favs) {
             $favs->register(My::id(), [
                 'title'       => My::name(),
-                'url'         => dcCore::app()->adminurl->get('admin.plugin.'.My::id()),
-                'small-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
-                'large-icon'  => [dcPage::getPF(My::id().'/icon.svg'), dcPage::getPF(My::id().'/icon-dark.svg')],
+                'url'         => dcCore::app()->adminurl->get('admin.plugin.' . My::id()),
+                'small-icon'  => [dcPage::getPF(My::id() . '/icon.svg'), dcPage::getPF(My::id() . '/icon-dark.svg')],
+                'large-icon'  => [dcPage::getPF(My::id() . '/icon.svg'), dcPage::getPF(My::id() . '/icon-dark.svg')],
                 'permissions' => My::checkContext(My::BACKEND),
             ]);
         });
@@ -212,7 +211,8 @@ class Backend extends dcNsProcess
 
     public static function adminPostHeaders(): string
     {
-        return '<style type="text/css">' . "\n" .
+        return
+        '<style type="text/css">' . "\n" .
         '.more_dates {margin: 0 0 1em 0;}' . "\n" .
         '.more_dates:first-of-type label {margin-top:.5em}' . "\n" .
         '.today_helper{min-width: 12.5em}' . "\n" .
