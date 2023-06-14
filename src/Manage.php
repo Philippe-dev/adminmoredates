@@ -36,27 +36,9 @@ class Manage extends dcNsProcess
      */
     public static function init(): bool
     {
-        if (is_null(dcCore::app()->blog->settings->get(My::id())->enabled)) {
-            try {
-                // Add default settings values if necessary
-                $settings = dcCore::app()->blog->settings->get(My::id());
+        static::$init = My::checkContext(My::MANAGE);
 
-                $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
-                $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);
-                $settings->put('upddt', false, 'boolean', 'Display update date', false, true);
-                $settings->put('lists', false, 'boolean', 'Display on posts lists', false, true);
-                $settings->put('posts', false, 'boolean', 'Display on post form', false, true);
-
-                dcCore::app()->blog->triggerBlog();
-                Http::redirect(My::url());
-            } catch (Exception $e) {
-                dcCore::app()->error->add($e->getMessage());
-            }
-        }
-
-        self::$init = My::checkContext(My::MANAGE);
-
-        return self::$init;
+        return static::$init;
     }
 
     /**
@@ -64,7 +46,7 @@ class Manage extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return false;
         }
 
@@ -90,7 +72,7 @@ class Manage extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return;
         }
 
