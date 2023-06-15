@@ -10,10 +10,6 @@
  * @copyright philippe@dissitou.org
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-if (!defined('DC_RC_PATH')) {
-    return;
-}
-
 $this->registerModule(
     'Admin More Dates',
     'Display creation and update dates in posts and pages lists',
@@ -22,7 +18,7 @@ $this->registerModule(
     [
         'requires'    => [['core', '2.27']],
         'permissions' => null,
-        'type'    => 'plugin',
-        'support' => 'https://github.com/Philippe-dev/adminmoredates',
+        'type'        => 'plugin',
+        'support'     => 'https://github.com/Philippe-dev/adminmoredates',
     ]
 );
