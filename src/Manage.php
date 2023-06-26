@@ -61,7 +61,7 @@ class Manage extends dcNsProcess
             $settings->put('posts', !empty($_POST['posts']));
 
             dcCore::app()->blog->triggerBlog();
-            dcCore::app()->adminurl->redirect('admin.plugin.' . My::id(), ['upd' => 1]);
+            My::redirect(['upd' => 1]);
         }
 
         return true;
