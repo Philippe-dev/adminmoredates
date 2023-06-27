@@ -18,7 +18,6 @@ namespace Dotclear\Plugin\adminmoredates;
 use dcCore;
 use dcNsProcess;
 use dcPage;
-use Exception;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Legend;
 use Dotclear\Helper\Html\Form\Form;
@@ -27,10 +26,11 @@ use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Html;
-use Dotclear\Helper\Network\Http;
 
 class Manage extends dcNsProcess
 {
+    protected static $init = false; /** @deprecated since 2.27 */
+
     /**
      * Initializes the page.
      */

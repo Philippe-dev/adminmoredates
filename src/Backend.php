@@ -21,7 +21,6 @@ use dcNsProcess;
 use form;
 use dcAdmin;
 use dcFavorites;
-use dcPage;
 use ArrayObject;
 use Exception;
 use Dotclear\Database\{
@@ -33,6 +32,7 @@ use Dotclear\Helper\Html\Html;
 
 class Backend extends dcNsProcess
 {
+    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
         static::$init = My::checkContext(My::BACKEND);
