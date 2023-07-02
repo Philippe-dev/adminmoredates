@@ -16,8 +16,8 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
-use dcNsProcess;
-use dcPage;
+use Dotclear\Core\Backend\Page;
+use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Legend;
 use Dotclear\Helper\Html\Form\Form;
@@ -27,18 +27,13 @@ use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Html;
 
-class Manage extends dcNsProcess
+class Manage extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
-
-    /**
-     * Initializes the page.
-     */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::MANAGE);
+        self::status(My::checkContext(My::MANAGE));
 
-        return static::$init;
+        return self::status();
     }
 
     /**
@@ -46,19 +41,17 @@ class Manage extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
-
         // Saving configurations
         if (isset($_POST['save'])) {
-            $settings->put('enabled', !empty($_POST['enabled']));
-            $settings->put('creadt', !empty($_POST['creadt']));
-            $settings->put('upddt', !empty($_POST['upddt']));
-            $settings->put('lists', !empty($_POST['lists']));
-            $settings->put('posts', !empty($_POST['posts']));
+            My::settings()->put('enabled', !empty($_POST['enabled']));
+            My::settings()->put('creadt', !empty($_POST['creadt']));
+            My::settings()->put('upddt', !empty($_POST['upddt']));
+            My::settings()->put('lists', !empty($_POST['lists']));
+            My::settings()->put('posts', !empty($_POST['posts']));
 
             dcCore::app()->blog->triggerBlog();
             My::redirect(['upd' => 1]);
@@ -72,27 +65,25 @@ class Manage extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
-
-        dcPage::openModule(
+        Page::openModule(
             My::name(),
-            dcPage::jsConfirmClose('config-form')
+            Page::jsConfirmClose('config-form')
         );
 
-        echo dcPage::breadcrumb(
+        echo Page::breadcrumb(
             [
                 Html::escapeHTML(dcCore::app()->blog->name) => '',
                 My::name()                                  => '',
             ]
         ) .
-        dcPage::notices();
+        Page::notices();
 
         if (isset($_GET['upd']) && $_GET['upd'] == 1) {
-            dcPage::success(__('Configuration successfully saved'));
+            Page::success(__('Configuration successfully saved'));
         }
 
         echo
@@ -104,7 +95,7 @@ class Manage extends dcNsProcess
                 ->legend((new Legend(__('Activation'))))
                 ->fields([
                     (new Para())->items([
-                        (new Checkbox('enabled', $settings->enabled))
+                        (new Checkbox('enabled', My::settings()->enabled))
                             ->value(1)
                             ->label((new Label(__('Activate plugin on this blog'), Label::INSIDE_TEXT_AFTER))),
                     ]),
@@ -113,12 +104,12 @@ class Manage extends dcNsProcess
                 ->legend((new Legend(__('Dates'))))
                 ->fields([
                     (new Para())->items([
-                        (new Checkbox('creadt', $settings->creadt))
+                        (new Checkbox('creadt', My::settings()->creadt))
                             ->value(1)
                             ->label((new Label(__('Display posts creation date'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->items([
-                        (new Checkbox('upddt', $settings->upddt))
+                        (new Checkbox('upddt', My::settings()->upddt))
                             ->value(1)
                             ->label((new Label(__('Display posts update date'), Label::INSIDE_TEXT_AFTER))),
                     ]),
@@ -127,12 +118,12 @@ class Manage extends dcNsProcess
                 ->legend((new Legend(__('Places'))))
                 ->fields([
                     (new Para())->items([
-                        (new Checkbox('lists', $settings->lists))
+                        (new Checkbox('lists', My::settings()->lists))
                             ->value(1)
                             ->label((new Label(__('Display dates on posts lists'), Label::INSIDE_TEXT_AFTER))),
                     ]),
                     (new Para())->items([
-                        (new Checkbox('posts', $settings->posts))
+                        (new Checkbox('posts', My::settings()->posts))
                             ->value(1)
                             ->label((new Label(__('Display dates on post form'), Label::INSIDE_TEXT_AFTER))),
                     ]),
@@ -146,7 +137,7 @@ class Manage extends dcNsProcess
             ])
         ->render();
 
-        dcPage::helpBlock('adminmoredatesconfig');
-        dcPage::closeModule();
+        Page::helpBlock('adminmoredatesconfig');
+        Page::closeModule();
     }
 }

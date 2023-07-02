@@ -15,16 +15,8 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
 use Dotclear\Module\MyPlugin;
 
 class My extends MyPlugin
 {
-    /**
-     * Current admin page url
-     */
-    public static function url(): string
-    {
-        return dcCore::app()->admin->getPageURL();
-    }
 }

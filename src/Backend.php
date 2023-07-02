@@ -17,37 +17,32 @@ namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
 use dcBlog;
-use dcNsProcess;
 use form;
-use dcAdmin;
-use dcFavorites;
 use ArrayObject;
 use Exception;
-use Dotclear\Database\{
-    Cursor,
-    MetaRecord
-};
+use Dotclear\Core\Backend\Favorites;
+use Dotclear\Core\Backend\Utility;
+use Dotclear\Core\Process;
+use Dotclear\Database\Cursor;
+use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 
-class Backend extends dcNsProcess
+class Backend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::BACKEND);
-
-        return static::$init;
+        return self::status(My::checkContext(My::BACKEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
         dcCore::app()->addBehaviors([
-            'adminDashboardFavoritesV2' => function (dcFavorites $favs) {
+            'adminDashboardFavoritesV2' => function (Favorites $favs) {
                 $favs->register(My::id(), [
                     'title'       => My::name(),
                     'url'         => My::manageUrl(),
@@ -60,12 +55,10 @@ class Backend extends dcNsProcess
             },
         ]);
 
-        My::addBackendMenuItem(dcAdmin::MENU_BLOG);
+        My::addBackendMenuItem(Utility::MENU_BLOG);
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
-
-        if ($settings->enabled) {
-            if ($settings->lists) {
+        if (My::settings()->enabled) {
+            if (My::settings()->lists) {
                 dcCore::app()->addBehavior('adminColumnsListsV2', [BackendBehaviors::class, 'adminColumnsLists']);
                 dcCore::app()->addBehavior('adminPostListHeaderV2', [BackendBehaviors::class, 'adminPostListHeader']);
                 dcCore::app()->addBehavior('adminPostListValueV2', [BackendBehaviors::class, 'adminPostListValue']);
@@ -73,7 +66,7 @@ class Backend extends dcNsProcess
                 dcCore::app()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
                 dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
             }
-            if ($settings->posts) {
+            if (My::settings()->posts) {
                 dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
                 dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
                 dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
@@ -168,8 +161,6 @@ class Backend extends dcNsProcess
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): void
     {
         if ($post !== null) {
-            $settings = dcCore::app()->blog->settings->get(My::id());
-
             $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
             form::datetime('post_dt', [
                 'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_dt))),
@@ -179,7 +170,7 @@ class Backend extends dcNsProcess
             '<div class="more_dates"><label for="more_dates">' . __('More dates') . '</label>' .
                 '<div id="more_dates">' ;
 
-            if ($settings->upddt) {
+            if (My::settings()->upddt) {
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
                     'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
@@ -188,7 +179,7 @@ class Backend extends dcNsProcess
                 '</p>';
             }
 
-            if ($settings->creadt) {
+            if (My::settings()->creadt) {
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
                     'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
@@ -200,7 +191,7 @@ class Backend extends dcNsProcess
             $item .= '</div>' .
             '</div>';
 
-            if ($settings->creadt || $settings->upddt) {
+            if (My::settings()->creadt || My::settings()->upddt) {
                 $sidebar['status-box']['items']['post_dt'] = $item;
             }
         }

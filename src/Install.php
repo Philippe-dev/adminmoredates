@@ -15,32 +15,26 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
-use dcNsProcess;
+use Dotclear\Core\Process;
 
-class Install extends dcNsProcess
+class Install extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::INSTALL);
-
-        return static::$init;
+        return self::status(My::checkContext(My::INSTALL));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
-
-        $settings->put('enabled', false, 'boolean', 'Enable plugin', false, true);
-        $settings->put('creadt', false, 'boolean', 'Display creation date', false, true);
-        $settings->put('upddt', false, 'boolean', 'Display update date', false, true);
-        $settings->put('lists', false, 'boolean', 'Display on posts lists', false, true);
-        $settings->put('posts', false, 'boolean', 'Display on post form', false, true);
+        My::settings()->put('enabled', false, 'boolean', 'Enable plugin', false, true);
+        My::settings()->put('creadt', false, 'boolean', 'Display creation date', false, true);
+        My::settings()->put('upddt', false, 'boolean', 'Display update date', false, true);
+        My::settings()->put('lists', false, 'boolean', 'Display on posts lists', false, true);
+        My::settings()->put('posts', false, 'boolean', 'Display on post form', false, true);
 
         return true;
     }
