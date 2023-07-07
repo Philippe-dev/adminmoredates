@@ -17,6 +17,7 @@ namespace Dotclear\Plugin\adminmoredates;
 
 use dcCore;
 use Dotclear\Core\Backend\Page;
+use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Legend;
@@ -80,10 +81,10 @@ class Manage extends Process
                 My::name()                                  => '',
             ]
         ) .
-        Page::notices();
+        Notices::getNotices();
 
         if (isset($_GET['upd']) && $_GET['upd'] == 1) {
-            Page::success(__('Configuration successfully saved'));
+            Notices::success(__('Configuration successfully saved'));
         }
 
         echo
