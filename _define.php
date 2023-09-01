@@ -14,7 +14,7 @@ $this->registerModule(
     'Admin More Dates',
     'Display creation and update dates in posts and pages lists',
     'Philippe aka amalgame and contributors',
-    '2.4',
+    '2.4.1',
     [
         'requires'    => [['core', '2.27']],
         'permissions' => null,
