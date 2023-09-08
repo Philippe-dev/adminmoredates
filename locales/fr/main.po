@@ -13,6 +13,9 @@ msgstr ""
 msgid "Admin More Dates"
 msgstr "Dates supplémentaires"
 
+msgid "Display creation and update dates in posts and pages lists"
+msgstr "Afficher les dates de création ou de mise à jour des billets"
+
 msgid "More dates"
 msgstr "Dates supplémentaires"
 
