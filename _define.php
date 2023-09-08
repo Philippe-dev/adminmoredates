@@ -12,12 +12,14 @@
  */
 $this->registerModule(
     'Admin More Dates',
-    'Display creation and update dates in posts and pages lists',
+    'Display entries creation or update dates',
     'Philippe aka amalgame and contributors',
     '2.5',
     [
         'requires'    => [['core', '2.28']],
-        'permissions' => null,
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_ADMIN,
+        ]),
         'type'        => 'plugin',
         'support'     => 'https://github.com/Philippe-dev/adminmoredates',
     ]
