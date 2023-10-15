@@ -15,7 +15,7 @@
 
  namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Dotclear\Plugin\Uninstaller\Uninstaller;
 
@@ -28,7 +28,7 @@ class Uninstall extends Process
 
     public static function process(): bool
     {
-        if (!self::status() || !dcCore::app()->plugins->moduleExists('Uninstaller')) {
+        if (!self::status() || !App::plugins()->moduleExists('Uninstaller')) {
             return false;
         }
 
@@ -41,7 +41,7 @@ class Uninstall extends Process
         // $var   = My::id(); // Var sub-folder
 
         // Database table name
-        // $table = dcCore::app()->prefix . 'adminmoredates';
+        // $table = App::con()->prefix() . 'adminmoredates';
 
         $user_actions = [
 
@@ -87,7 +87,7 @@ class Uninstall extends Process
             ],
 
             // Plugin or Theme
-            (dcCore::app()->plugins->getDefines(['id' => $module]) ? 'plugins' : 'themes') => [
+            (App::plugins()->getDefines(['id' => $module]) ? 'plugins' : 'themes') => [
                 ['delete', $module],    // Same as plugin/theme Delete button in plugin/theme management
             ],
 
@@ -150,7 +150,7 @@ class Uninstall extends Process
             ],
 
             // Plugin or Theme
-            (dcCore::app()->plugins->getDefines(['id' => $module]) ? 'plugins' : 'themes') => [
+            (App::plugins()->getDefines(['id' => $module]) ? 'plugins' : 'themes') => [
                 ['delete', $module],    // Same as plugin/theme Delete button in plugin/theme management
             ],
 

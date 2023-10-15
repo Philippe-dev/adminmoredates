@@ -15,11 +15,11 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
 use dcBlog;
 use form;
 use ArrayObject;
 use Exception;
+use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
 use Dotclear\Core\Backend\Utility;
 use Dotclear\Core\Process;
@@ -41,15 +41,15 @@ class Backend extends Process
             return false;
         }
 
-        dcCore::app()->addBehaviors([
+        App::behavior()->addBehaviors([
             'adminDashboardFavoritesV2' => function (Favorites $favs) {
                 $favs->register(My::id(), [
                     'title'       => My::name(),
                     'url'         => My::manageUrl(),
                     'small-icon'  => My::icons(),
                     'large-icon'  => My::icons(),
-                    'permissions' => dcCore::app()->auth->makePermissions([
-                        dcCore::app()->auth::PERMISSION_ADMIN,
+                    'permissions' => App::auth()->makePermissions([
+                        App::auth()::PERMISSION_ADMIN,
                     ]),
                 ]);
             },
@@ -59,65 +59,65 @@ class Backend extends Process
 
         if (My::settings()->enabled) {
             if (My::settings()->lists) {
-                dcCore::app()->addBehavior('adminColumnsListsV2', [BackendBehaviors::class, 'adminColumnsLists']);
-                dcCore::app()->addBehavior('adminPostListHeaderV2', [BackendBehaviors::class, 'adminPostListHeader']);
-                dcCore::app()->addBehavior('adminPostListValueV2', [BackendBehaviors::class, 'adminPostListValue']);
-                dcCore::app()->addBehavior('adminPagesListHeaderV2', [BackendBehaviors::class, 'adminPagesListHeader']);
-                dcCore::app()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
-                dcCore::app()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
+                App::behavior()->addBehavior('adminColumnsListsV2', [BackendBehaviors::class, 'adminColumnsLists']);
+                App::behavior()->addBehavior('adminPostListHeaderV2', [BackendBehaviors::class, 'adminPostListHeader']);
+                App::behavior()->addBehavior('adminPostListValueV2', [BackendBehaviors::class, 'adminPostListValue']);
+                App::behavior()->addBehavior('adminPagesListHeaderV2', [BackendBehaviors::class, 'adminPagesListHeader']);
+                App::behavior()->addBehavior('adminPagesListValueV2', [BackendBehaviors::class, 'adminPagesListValue']);
+                App::behavior()->addBehavior('adminPostsSortbyCombo', [BackendBehaviors::class, 'adminPostsSortbyCombo']);
             }
             if (My::settings()->posts) {
-                dcCore::app()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
-                dcCore::app()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
-                dcCore::app()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
-                dcCore::app()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
-                dcCore::app()->addBehavior('adminAfterPostUpdate', [self::class,  'adminAfterPostUpdate']);
-                dcCore::app()->addBehavior('adminAfterPageUpdate', [self::class,  'adminAfterPostUpdate']);
+                App::behavior()->addBehavior('adminPostFormItems', [self::class, 'adminPostFormItems']);
+                App::behavior()->addBehavior('adminPageFormItems', [self::class, 'adminPostFormItems']);
+                App::behavior()->addBehavior('adminPostHeaders', [self::class,  'adminPostHeaders']);
+                App::behavior()->addBehavior('adminPageHeaders', [self::class,  'adminPostHeaders']);
+                App::behavior()->addBehavior('adminAfterPostUpdate', [self::class,  'adminAfterPostUpdate']);
+                App::behavior()->addBehavior('adminAfterPageUpdate', [self::class,  'adminAfterPostUpdate']);
             }
         }
 
         if (!empty($_REQUEST['id'])) {
             $params['post_id']         = $_REQUEST['id'];
-            dcCore::app()->admin->post = dcCore::app()->blog->getPosts($params);
+            App::backend()->post = App::blog()->getPosts($params);
 
-            dcCore::app()->admin->post_id       = (int) dcCore::app()->admin->post->post_id;
-            dcCore::app()->admin->post_creadt   = (int) dcCore::app()->admin->post->post_creadt;
-            dcCore::app()->admin->post_upddt    = (int) dcCore::app()->admin->post->post_upddt;
-            dcCore::app()->admin->can_edit_page = dcCore::app()->admin->post->isEditable();
+            App::backend()->post_id       = (int) App::backend()->post->post_id;
+            App::backend()->post_creadt   = (int) App::backend()->post->post_creadt;
+            App::backend()->post_upddt    = (int) App::backend()->post->post_upddt;
+            App::backend()->can_edit_page = App::backend()->post->isEditable();
         }
 
-        if (!empty($_POST) && dcCore::app()->admin->can_edit_page) {
+        if (!empty($_POST) && App::backend()->can_edit_page) {
             // Format content
 
             if (empty($_POST['post_creadt'])) {
-                dcCore::app()->admin->post_creadt = '';
+                App::backend()->post_creadt = '';
             } else {
                 try {
-                    dcCore::app()->admin->post_creadt = strtotime($_POST['post_creadt']);
-                    if (!dcCore::app()->admin->post_creadt || dcCore::app()->admin->post_creadt == -1) {
-                        dcCore::app()->admin->bad_dt = true;
+                    App::backend()->post_creadt = strtotime($_POST['post_creadt']);
+                    if (!App::backend()->post_creadt || App::backend()->post_creadt == -1) {
+                        App::backend()->bad_dt = true;
 
                         throw new Exception(__('Invalid publication date'));
                     }
-                    dcCore::app()->admin->post_creadt = date('Y-m-d H:i', dcCore::app()->admin->post_creadt);
+                    App::backend()->post_creadt = date('Y-m-d H:i', App::backend()->post_creadt);
                 } catch (Exception $e) {
-                    dcCore::app()->error->add($e->getMessage());
+                    App::error()->add($e->getMessage());
                 }
             }
 
             if (empty($_POST['post_upddt'])) {
-                dcCore::app()->admin->post_upddt = '';
+                App::backend()->post_upddt = '';
             } else {
                 try {
-                    dcCore::app()->admin->post_upddt = strtotime($_POST['post_upddt']);
-                    if (!dcCore::app()->admin->post_upddt || dcCore::app()->admin->post_upddt == -1) {
-                        dcCore::app()->admin->bad_dt = true;
+                    App::backend()->post_upddt = strtotime($_POST['post_upddt']);
+                    if (!App::backend()->post_upddt || App::backend()->post_upddt == -1) {
+                        App::backend()->bad_dt = true;
 
                         throw new Exception(__('Invalid publication date'));
                     }
-                    dcCore::app()->admin->post_upddt = date('Y-m-d H:i', dcCore::app()->admin->post_upddt);
+                    App::backend()->post_upddt = date('Y-m-d H:i', App::backend()->post_upddt);
                 } catch (Exception $e) {
-                    dcCore::app()->error->add($e->getMessage());
+                    App::error()->add($e->getMessage());
                 }
             }
         }
@@ -136,12 +136,12 @@ class Backend extends Process
         if (!isset($_POST['post_creadt'])) {
             return;
         }
-        $cur              = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
-        $cur->post_creadt = dcCore::app()->admin->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_creadt);
+        $cur              = App::con()->openCursor(App::con()->prefix() . dcBlog::POST_TABLE_NAME);
+        $cur->post_creadt = App::backend()->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_creadt);
 
         $cur->update(
-            'WHERE post_id = ' . dcCore::app()->admin->post_id . ' ' .
-            "AND blog_id = '" . dcCore::app()->con->escapeStr(dcCore::app()->blog->id) . "' "
+            'WHERE post_id = ' . App::backend()->post_id . ' ' .
+            "AND blog_id = '" . App::con()->escapeStr(App::blog()->id) . "' "
         );
 
         //update date
@@ -149,12 +149,12 @@ class Backend extends Process
         if (!isset($_POST['post_upddt'])) {
             return;
         }
-        $cur             = dcCore::app()->con->openCursor(dcCore::app()->prefix . dcBlog::POST_TABLE_NAME);
-        $cur->post_upddt = dcCore::app()->admin->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), dcCore::app()->admin->post_upddt);
+        $cur             = App::con()->openCursor(App::con()->prefix() . dcBlog::POST_TABLE_NAME);
+        $cur->post_upddt = App::backend()->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_upddt);
 
         $cur->update(
-            'WHERE post_id = ' . dcCore::app()->admin->post_id . ' ' .
-            "AND blog_id = '" . dcCore::app()->con->escapeStr(dcCore::app()->blog->id) . "' "
+            'WHERE post_id = ' . App::backend()->post_id . ' ' .
+            "AND blog_id = '" . App::con()->escapeStr(App::blog()->id) . "' "
         );
     }
 
@@ -164,7 +164,7 @@ class Backend extends Process
             $item = '<p><label for="post_dt">' . __('Publication date and hour') . '</label>' .
             form::datetime('post_dt', [
                 'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_dt))),
-                'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+                'class'   => (App::backend()->bad_dt ? 'invalid' : ''),
             ]) .
             '</p>' .
             '<div class="more_dates"><label for="more_dates">' . __('More dates') . '</label>' .
@@ -174,7 +174,7 @@ class Backend extends Process
                 $item .= '<p><label for="post_upddt">' . __('Update date and hour') . '</label>' .
                 form::datetime('post_upddt', [
                     'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_upddt))),
-                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+                    'class'   => (App::backend()->bad_dt ? 'invalid' : ''),
                 ]) .
                 '</p>';
             }
@@ -183,7 +183,7 @@ class Backend extends Process
                 $item .= '<p><label for="post_creadt">' . __('Creation date and hour') . '</label>' .
                 form::datetime('post_creadt', [
                     'default' => Html::escapeHTML(Date::str('%Y-%m-%dT%H:%M', strtotime((string) $post->post_creadt))),
-                    'class'   => (dcCore::app()->admin->bad_dt ? 'invalid' : ''),
+                    'class'   => (App::backend()->bad_dt ? 'invalid' : ''),
                 ]) .
                 '</p>';
             }

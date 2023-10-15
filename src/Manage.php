@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Process;
@@ -54,7 +54,7 @@ class Manage extends Process
             My::settings()->put('lists', !empty($_POST['lists']));
             My::settings()->put('posts', !empty($_POST['posts']));
 
-            dcCore::app()->blog->triggerBlog();
+            App::blog()->triggerBlog();
             My::redirect(['upd' => 1]);
         }
 
@@ -77,7 +77,7 @@ class Manage extends Process
 
         echo Page::breadcrumb(
             [
-                Html::escapeHTML(dcCore::app()->blog->name) => '',
+                Html::escapeHTML(App::blog()->name) => '',
                 My::name()                                  => '',
             ]
         ) .
@@ -89,7 +89,7 @@ class Manage extends Process
 
         echo
         (new Form('config-form'))
-            ->action(dcCore::app()->admin->getPageURL())
+            ->action(App::backend()->getPageURL())
             ->method('post')
             ->fields([
                 (new Fieldset('activation'))
@@ -133,7 +133,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['save']))
                         ->value(__('Save configuration')),
-                    dcCore::app()->formNonce(false),
+                    App::nonce()->formNonce(),
                 ]),
             ])
         ->render();

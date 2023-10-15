@@ -17,9 +17,7 @@ $this->registerModule(
     '3.0',
     [
         'requires'    => [['core', '2.28']],
-        'permissions' => dcCore::app()->auth->makePermissions([
-            dcAuth::PERMISSION_ADMIN,
-        ]),
+        'permissions' => 'My',
         'type'        => 'plugin',
         'support'     => 'https://github.com/Philippe-dev/adminmoredates',
     ]
