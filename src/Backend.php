@@ -21,7 +21,6 @@ use ArrayObject;
 use Exception;
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
-use Dotclear\Core\Backend\Utility;
 use Dotclear\Core\Process;
 use Dotclear\Database\Cursor;
 use Dotclear\Database\MetaRecord;
@@ -55,7 +54,7 @@ class Backend extends Process
             },
         ]);
 
-        My::addBackendMenuItem(Utility::MENU_BLOG);
+        My::addBackendMenuItem(App::backend()->menus()::MENU_BLOG);
 
         if (My::settings()->enabled) {
             if (My::settings()->lists) {

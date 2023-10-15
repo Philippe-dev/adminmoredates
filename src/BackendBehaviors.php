@@ -32,7 +32,7 @@ class BackendBehaviors
         }
     }
 
-    private static function adminEntryListHeader($core, $rs, $cols)
+    private static function adminEntryListHeader($rs, $cols)
     {
         if (My::settings()->creadt) {
             $cols['creadt'] = '<th scope="col">' . __('Created') . '</th>';
@@ -44,15 +44,15 @@ class BackendBehaviors
 
     public static function adminPostListHeader($rs, $cols)
     {
-        self::adminEntryListHeader(dcCore::app(), $rs, $cols);
+        self::adminEntryListHeader($rs, $cols);
     }
 
     public static function adminPagesListHeader($rs, $cols)
     {
-        self::adminEntryListHeader(dcCore::app(), $rs, $cols);
+        self::adminEntryListHeader($rs, $cols);
     }
 
-    public static function adminEntryListValue($core, $rs, $cols)
+    public static function adminEntryListValue($rs, $cols)
     {
         if (My::settings()->creadt) {
             $cols['creadt'] = '<td class="nowrap">' . Date::dt2str(__('%Y-%m-%d %H:%M'), $rs->post_creadt) . '</td>';
@@ -64,12 +64,12 @@ class BackendBehaviors
 
     public static function adminPostListValue($rs, $cols)
     {
-        self::adminEntryListValue(dcCore::app(), $rs, $cols);
+        self::adminEntryListValue($rs, $cols);
     }
 
     public static function adminPagesListValue($rs, $cols)
     {
-        self::adminEntryListValue(dcCore::app(), $rs, $cols);
+        self::adminEntryListValue($rs, $cols);
     }
 
     public static function adminPostsSortbyCombo($container)
