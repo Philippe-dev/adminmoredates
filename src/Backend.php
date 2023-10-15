@@ -76,7 +76,7 @@ class Backend extends Process
         }
 
         if (!empty($_REQUEST['id'])) {
-            $params['post_id']         = $_REQUEST['id'];
+            $params['post_id']   = $_REQUEST['id'];
             App::backend()->post = App::blog()->getPosts($params);
 
             App::backend()->post_id       = (int) App::backend()->post->post_id;

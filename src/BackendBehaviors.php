@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcCore;
 use Dotclear\Helper\Date;
 
 class BackendBehaviors

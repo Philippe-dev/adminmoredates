@@ -23,7 +23,6 @@ class My extends MyPlugin
     public static function checkCustomContext(int $context): ?bool
     {
         return match ($context) {
-            
             self::MANAGE, self::MENU => App::task()->checkContext('BACKEND')
                 && App::blog()->isDefined()
                 && App::auth()->check(App::auth()->makePermissions([
