@@ -124,7 +124,7 @@ class Backend extends Process
         return true;
     }
 
-    public static function adminAfterPostUpdate(Cursor $cur, ?int $post_id): void
+    public static function adminAfterPostUpdate(Cursor $cur, $post_id): void
     {
         if (is_null($post_id)) {
             return;
