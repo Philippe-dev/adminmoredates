@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\adminmoredates;
 
-use dcBlog;
 use form;
 use ArrayObject;
 use Exception;
@@ -135,7 +134,7 @@ class Backend extends Process
         if (!isset($_POST['post_creadt'])) {
             return;
         }
-        $cur              = App::con()->openCursor(App::con()->prefix() . dcBlog::POST_TABLE_NAME);
+        $cur              = App::con()->openCursor(App::con()->prefix() . App::blog()::POST_TABLE_NAME);
         $cur->post_creadt = App::backend()->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_creadt);
 
         $cur->update(
@@ -148,7 +147,7 @@ class Backend extends Process
         if (!isset($_POST['post_upddt'])) {
             return;
         }
-        $cur             = App::con()->openCursor(App::con()->prefix() . dcBlog::POST_TABLE_NAME);
+        $cur             = App::con()->openCursor(App::con()->prefix() . App::blog()::POST_TABLE_NAME);
         $cur->post_upddt = App::backend()->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_upddt);
 
         $cur->update(
