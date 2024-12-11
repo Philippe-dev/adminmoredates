@@ -14,7 +14,7 @@ $this->registerModule(
     'Admin More Dates',
     'Display entries creation or update dates',
     'Philippe aka amalgame and contributors',
-    '3.0.1',
+    '3.0.2',
     [
         'requires'    => [['core', '2.28']],
         'permissions' => 'My',
