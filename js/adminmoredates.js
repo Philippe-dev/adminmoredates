@@ -1,4 +1,4 @@
-$(document).ready(function () {
+dotclear.ready(() => {
     $("#more_dates")
         .parent()
         .children("label")
