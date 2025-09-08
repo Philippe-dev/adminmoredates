@@ -18,14 +18,16 @@ use ArrayObject;
 use Exception;
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 use Dotclear\Database\Cursor;
 use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 
-class Backend extends Process
+class Backend
 {
+    use TraitProcess;
+    
     public static function init(): bool
     {
         return self::status(My::checkContext(My::BACKEND));
