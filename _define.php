@@ -12,10 +12,10 @@ $this->registerModule(
     'Admin More Dates',
     'Display entries creation or update dates',
     'Philippe aka amalgame and contributors',
-    '3.2',
+    '3.3',
     [
-        'date'        => '2025-07-03T00:00:13+0100',
-        'requires'    => [['core', '2.28']],
+        'date'        => '2025-09-08T00:00:08+0100',
+        'requires'    => [['core', '2.36']],
         'permissions' => 'My',
         'type'        => 'plugin',
         'support'     => 'https://github.com/Philippe-dev/adminmoredates',
