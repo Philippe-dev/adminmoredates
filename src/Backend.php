@@ -134,12 +134,12 @@ class Backend
         if (!isset($_POST['post_creadt'])) {
             return;
         }
-        $cur              = App::con()->openCursor(App::con()->prefix() . App::blog()::POST_TABLE_NAME);
+        $cur              = App::db()->con()->openCursor(App::db()->con()->prefix() . App::blog()::POST_TABLE_NAME);
         $cur->post_creadt = App::backend()->post_creadt ? $_POST['post_creadt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_creadt);
 
         $cur->update(
             'WHERE post_id = ' . App::backend()->post_id . ' ' .
-            "AND blog_id = '" . App::con()->escapeStr(App::blog()->id) . "' "
+            "AND blog_id = '" . App::db()->con()->escapeStr(App::blog()->id) . "' "
         );
 
         //update date
@@ -147,12 +147,12 @@ class Backend
         if (!isset($_POST['post_upddt'])) {
             return;
         }
-        $cur             = App::con()->openCursor(App::con()->prefix() . App::blog()::POST_TABLE_NAME);
+        $cur             = App::db()->con()->openCursor(App::db()->con()->prefix() . App::blog()::POST_TABLE_NAME);
         $cur->post_upddt = App::backend()->post_upddt ? $_POST['post_upddt'] : Date::dt2str(__('%Y-%m-%d %H:%M'), App::backend()->post_upddt);
 
         $cur->update(
             'WHERE post_id = ' . App::backend()->post_id . ' ' .
-            "AND blog_id = '" . App::con()->escapeStr(App::blog()->id) . "' "
+            "AND blog_id = '" . App::db()->con()->escapeStr(App::blog()->id) . "' "
         );
     }
 

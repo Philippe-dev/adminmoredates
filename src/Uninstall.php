@@ -41,7 +41,7 @@ class Uninstall
         // $var   = My::id(); // Var sub-folder
 
         // Database table name
-        // $table = App::con()->prefix() . 'adminmoredates';
+        // $table = App::db()->con()->prefix() . 'adminmoredates';
 
         $user_actions = [
 
