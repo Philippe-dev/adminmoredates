@@ -1,4 +1,4 @@
-# Dotclear 2 plugin
+# Dates supplémentaires
 
 Ce plugin permet d'afficher, dans les listes de billets ou de pages, deux colonnes supplémentaires optionnelles :
 
