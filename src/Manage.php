@@ -14,9 +14,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\adminmoredates;
 
 use Dotclear\App;
-use Dotclear\Core\Backend\Page;
-use Dotclear\Core\Backend\Notices;
-use Dotclear\Helper\Process\TraitProcess;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Legend;
 use Dotclear\Helper\Html\Form\Form;
@@ -25,6 +22,7 @@ use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Process\TraitProcess;
 
 class Manage
 {
@@ -70,21 +68,21 @@ class Manage
             return;
         }
 
-        Page::openModule(
+        App::backend()->page()->openModule(
             My::name(),
-            Page::jsConfirmClose('config-form')
+            App::backend()->page()->jsConfirmClose('config-form')
         );
 
-        echo Page::breadcrumb(
+        echo App::backend()->page()->breadcrumb(
             [
                 Html::escapeHTML(App::blog()->name) => '',
                 My::name()                          => '',
             ]
         ) .
-        Notices::getNotices();
+        App::backend()->notices()->getNotices();
 
         if (isset($_GET['upd']) && $_GET['upd'] == 1) {
-            Notices::success(__('Configuration successfully saved'));
+            App::backend()->notices()->success(__('Configuration successfully saved'));
         }
 
         echo
@@ -138,7 +136,7 @@ class Manage
             ])
         ->render();
 
-        Page::helpBlock('adminmoredatesconfig');
-        Page::closeModule();
+        App::backend()->page()->helpBlock('adminmoredatesconfig');
+        App::backend()->page()->closeModule();
     }
 }

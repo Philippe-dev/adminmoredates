@@ -12,9 +12,9 @@ $this->registerModule(
     'Admin More Dates',
     'Display entries creation or update dates',
     'Philippe aka amalgame and contributors',
-    '3.4',
+    '3.5',
     [
-        'date'        => '2025-09-11T00:00:08+0100',
+        'date'        => '2025-09-25T00:00:08+0100',
         'requires'    => [['core', '2.36']],
         'permissions' => 'My',
         'type'        => 'plugin',
